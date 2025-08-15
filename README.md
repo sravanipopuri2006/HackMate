@@ -1,0 +1,1 @@
+Students often struggle to find suitable teams for hackathons, while teams face difficulty finding skilled members. This leads to missed opportunities and weaker event participation. Our platform helps to connect students with teams, enabling easy applications, skill matching, and selection.
