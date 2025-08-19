@@ -37,5 +37,5 @@ const roleSchema=new mongoose.Schema({
         ref:'Application'
     }]
 
-});
+},{timestamps: true});
 export const Role=mongoose.model('Role',roleSchema);
