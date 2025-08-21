@@ -3,7 +3,7 @@ import express, { urlencoded } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import connectDB from "./utils/db.js";
-import userRoute from "./routes/user.routes.js";
+import userRoute from "./routes/user.route.js";
 
 dotenv.config({});
 
@@ -24,6 +24,7 @@ const port=process.env.port || 3000;
 
 // api's
 app.use("/api/v1/user",userRoute);
+
 
 app.listen(port,()=>{
     connectDB();
