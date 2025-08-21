@@ -3,7 +3,10 @@ import express, { urlencoded } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import connectDB from "./utils/db.js";
+import userRoute from "./routes/user.routes.js";
+
 dotenv.config({});
+
 const app=express();
 
 app.use(express.json());
@@ -18,6 +21,10 @@ const corsOptions={
 app.use(cors(corsOptions));
 
 const port=process.env.port || 3000;
+
+// api's
+app.use("/api/v1/user",userRoute);
+
 app.listen(port,()=>{
     connectDB();
     console.log("App is running successfully...");
