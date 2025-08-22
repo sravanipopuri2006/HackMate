@@ -81,7 +81,7 @@ export const updateProfile=async(req,res)=>{
         const file=req.file;
         const updateData={name,description,website,hackathonlevel};
         const team=await HackTeam.findByIdAndUpdate(req.params.id,updateData,{new:true});
-        if(!company){
+        if(!team){
             return res.status(404).json({
                 message:"Team not found",
                 success:false
