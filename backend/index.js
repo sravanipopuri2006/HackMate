@@ -4,6 +4,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import connectDB from "./utils/db.js";
 import userRoute from "./routes/user.route.js";
+import teamRoute from "./routes/hackteam.route.js"; 
 
 dotenv.config({});
 
@@ -24,6 +25,7 @@ const port=process.env.port || 3000;
 
 // api's
 app.use("/api/v1/user",userRoute);
+app.use("/api/v1/hackteam",teamRoute);
 
 
 app.listen(port,()=>{
