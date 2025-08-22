@@ -75,3 +75,23 @@ export const getTeamById=async(req,res)=>{
         console.log(error);
     }
 }
+export const updateProfile=async(req,res)=>{
+    try{
+        const {name,description,website,hackathonlevel}=req.body;
+        const file=req.file;
+        const updateData={name,description,website,hackathonlevel};
+        const team=await HackTeam.findByIdAndUpdate(req.params.id,updateData,{new:true});
+        if(!company){
+            return res.status(404).json({
+                message:"Team not found",
+                success:false
+            });
+        }
+
+
+    }
+    catch(error){
+        console.log(error);
+    }
+
+}
