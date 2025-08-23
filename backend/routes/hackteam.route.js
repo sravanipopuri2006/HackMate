@@ -1,5 +1,5 @@
 import express from "express";
-import { getTeamById, registerTeam } from "../controllers/hackteam.controller";
+import { getTeamById, registerTeam,getTeam,updateProfile } from "../controllers/hackteam.controller.js";
 import isAuthenticated from "../middlewares/isAuthenticated.js";
 
 

@@ -47,6 +47,11 @@ export const getTeam=async(req,res)=>{
             });
 
         }
+        return res.status(200).json({
+            
+            teams,
+            success:true
+        })
 
     }
     catch(error){
@@ -87,6 +92,10 @@ export const updateProfile=async(req,res)=>{
                 success:false
             });
         }
+        return res.status(200).json({
+            message:"Profile Updated..",
+            success:true
+        })
 
 
     }
