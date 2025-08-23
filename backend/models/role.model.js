@@ -22,6 +22,10 @@ const roleSchema=new mongoose.Schema({
         type:Number,
         required:true
     },
+    experienceLevel:{
+        type:String,
+        required:true
+    },
     hackTeam:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'HackTeam',
