@@ -84,7 +84,10 @@ export const getAdminRole = async (req, res) => {
                 success: false
             })
         }
-    
+    return res.status(200).json({
+        roles,
+        success: true
+    });
     } catch (error) { 
         console.log(error);
     }  
