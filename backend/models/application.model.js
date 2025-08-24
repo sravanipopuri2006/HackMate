@@ -6,7 +6,7 @@ const applicationSchema = new mongoose.Schema({
         ref: 'Role',
         required: true
     },
-    hackapplicant: {
+    hackApplicant: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true 

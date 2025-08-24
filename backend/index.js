@@ -6,6 +6,7 @@ import connectDB from "./utils/db.js";
 import userRoute from "./routes/user.route.js";
 import teamRoute from "./routes/hackteam.route.js"; 
 import roleRoute from "./routes/role.route.js";
+import applicationRoute from "./routes/application.route.js"
 
 dotenv.config({});
 
@@ -28,6 +29,7 @@ const port=process.env.port || 3000;
 app.use("/api/v1/user",userRoute);
 app.use("/api/v1/hackteam",teamRoute);
 app.use("/api/v1/role",roleRoute);
+app.use("/api/v1/application",applicationRoute);
 
 
 app.listen(port,()=>{

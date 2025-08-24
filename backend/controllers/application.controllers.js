@@ -1,6 +1,6 @@
 import {Application} from "../models/application.model.js";
 import { Role } from "../models/role.model.js";
-export const applyJob=async(req,res)=>{
+export const applyRole=async(req,res)=>{
     try{
         const userId=req.id;
         const roleId=req.params.id;
@@ -17,8 +17,8 @@ export const applyJob=async(req,res)=>{
                 success:false
             });
         }
-        const role=await Role.findById(roleId);
-        if(!role){
+        const roleApply=await Role.findById(roleId);
+        if(!roleApply){
             return res.status(400).json({
                 message:"Role not found",
                 success:false
@@ -27,10 +27,10 @@ export const applyJob=async(req,res)=>{
         //create a apllication for the role
         const newApplication=await Application.create({
             role:roleId,
-            hackapplicant:userId
+            hackApplicant:userId
         });
-        Role.applications.push(newApplication._id);
-        await Role.save();
+        roleApply.applications.push(newApplication._id);
+        await roleApply.save();
         return res.status(201).json({
             message:"Role applied successfully",
             success:true
@@ -43,10 +43,10 @@ export const applyJob=async(req,res)=>{
         console.log(error);
     }
 };
-export const getAppliedRole=async(ewq,res)=>{
+export const getAppliedRole=async(req,res)=>{
     try{
         const userId=req.id;
-        const application=await Application.find({applicant:userId}).sort({createdAt:-1}).populate({
+        const application=await Application.find({hackApplicant:userId}).sort({createdAt:-1}).populate({
             path:"role",
             options:{sort:{createdAt:-1}},
             populate:{
@@ -78,12 +78,12 @@ export const getAppliedRole=async(ewq,res)=>{
 //Team lead to knowt the candidates applied
 export const getApplicants=async(req,res)=>{
     try{
-        const roleId=req.params;
+        const roleId=req.params.id;
         const role=await Role.findById(roleId).populate({
             path:"applications",
             options:{sort:{createdAt:-1}},
             populate:{
-                path:'hackapplicant'
+                path:'hackApplicant'
             }
         });
         if(!role){
@@ -93,7 +93,7 @@ export const getApplicants=async(req,res)=>{
             });
         }
         return res.status(200).json({
-            job,
+            role,
             success:true
         });
 
