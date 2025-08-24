@@ -1,8 +1,9 @@
+import { Role } from "../models/role.model.js";
 export const postRole = async (req, res) => {
     try {
-        const { title, description, requirements, hackthonlevel, position, vacancies, hackTeamId} = req.body;
+        const { title, description, requirements, hackathonLevel, position,hackTeamId,experienceLevel} = req.body;
         const userId = req.id;
-        if (!title || !description || !requirements || !hackthonlevel || !position || !vacancies || !hackTeamId) {
+        if (!title || !description || !requirements || !hackathonLevel || !position ||!hackTeamId) {
             return res.status(400).json({
                 message: "All fields are required",
                 success: false
@@ -12,9 +13,9 @@ export const postRole = async (req, res) => {
             title,
             description,
             requirements,
-            hackthonlevel,
+            hackathonLevel,
             position,
-            vacancies,
+          
             hackTeamId,
             userId,
             experienceLevel,
@@ -40,8 +41,8 @@ export const getAllRoles = async (req, res) => {
                 { description: { $regex: keyword, $options: "i" } },
             ]
             };
-            const roles = await Role.find(query);
-            if (!jobs)  {
+            const roles = await Role.find(query).populate({path:'hackTeam'}).sort({createdAt:-1});
+            if (!roles)  {
                 return res.status(404).json({
                     message: "No roles found",
                     success: false

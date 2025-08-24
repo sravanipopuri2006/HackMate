@@ -18,10 +18,7 @@ const roleSchema=new mongoose.Schema({
         type:String,
         required:true
     },
-    vacancies:{
-        type:Number,
-        required:true
-    },
+   
     experienceLevel:{
         type:String,
         required:true

@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import connectDB from "./utils/db.js";
 import userRoute from "./routes/user.route.js";
 import teamRoute from "./routes/hackteam.route.js"; 
+import roleRoute from "./routes/role.route.js";
 
 dotenv.config({});
 
@@ -26,6 +27,7 @@ const port=process.env.port || 3000;
 // api's
 app.use("/api/v1/user",userRoute);
 app.use("/api/v1/hackteam",teamRoute);
+app.use("/api/v1/role",roleRoute);
 
 
 app.listen(port,()=>{
