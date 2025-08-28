@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Navbar from '../shared/Navbar'
 import { Label } from '../ui/label'
 import { Input } from '../ui/input'
@@ -7,55 +7,58 @@ import { Button } from '../ui/button'
 import { Link } from 'react-router-dom'
 
 export const Login = () => {
-  const {input, setInput} = useState({
-    fullname : "",
+  const [input, setInput] = useState({
+   
     email:"",
-    phoneNumber:"",
+   
     password:"",
     role:"",
-    file:""
+
   });
 
   const changeEventHandler = (e) => {
     setInput({...input, [e.target.name]:e.target.value});
   }
 
-  const changeFileHandler = (e) => {
-    setInput({...input, file:e.target.files?.[0]});
+ 
+   const submitHandler = async(e) => {
+    e.preventDefault();
+    console.log(input);
   }
-  
+
   return (
     <div>
         <Navbar/>
     <div className='flex items-center justify-center max-w-7xl mx-auto'>
-        <form action="" className='w-1/2 border border-gray-200 rounded-md p-4 my-10'>
+        <form onSubmit={submitHandler} className='w-1/2 border border-gray-200 rounded-md p-4 my-10'>
             <h1 className='font-bold text-xl mb-5'>Login</h1>
             
             <div className='my-2'>
                 <Label>Email</Label>
-                <Input type="email" placeholder="Enter your Email" className='my-2'></Input>
+                <Input type="email" value={input.email} name="email" onChange = {changeEventHandler} placeholder="Enter your Email" className='my-2'></Input>
 
 
             </div>
            
             <div className='my-2'>
                 <Label>Password</Label>
-                <Input type="password" placeholder="Enter your password" className='my-2'></Input>
+
+                <Input type="password" value = {input.password} name = "password" onChange = {changeEventHandler} placeholder="Enter your password" className='my-2'></Input>
 
 
             </div>
             <div className='flex items-center justify-between'>
-               <RadioGroup className='flex items-center gap-4 my-5'>
-                <div className="flex items-center space-x-2">
-                    <input type="radio" name='role' value='hackLead' className='cursor-pointer'/>
-                    <Label htmlFor="r1">Hack Lead</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                    <input type="radio" name='role' value='hackApplicant' className='cursor-pointer'/>
-                    
-                    <Label htmlFor="r2">Hack Applicant</Label>
-                </div>
-                </RadioGroup>
+            <RadioGroup className='flex items-center gap-4 my-5'>
+              <div className="flex items-center space-x-2">
+                <input type="radio" name='role' value='hackLead' checked={input.role == 'hackLead'} onChange={changeEventHandler} className='cursor-pointer' />
+                <Label htmlFor="r1">Hack Lead</Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <input type="radio" name='role' value='hackApplicant' checked={input.role == 'hackApplicant'} onChange={changeEventHandler} className='cursor-pointer' />
+
+                <Label htmlFor="r2">Hack Applicant</Label>
+              </div>
+            </RadioGroup>
               
 
 

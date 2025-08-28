@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Navbar from '../shared/Navbar'
 import { Label } from '../ui/label'
 import { Input } from '../ui/input'
@@ -7,7 +7,7 @@ import { Button } from '../ui/button'
 import { Link } from 'react-router-dom'
 
 export const Signup = () => {
-      const {input, setInput} = useState({
+      const [input, setInput] = useState({
     fullname : "",
     email:"",
     phoneNumber:"",
@@ -26,7 +26,7 @@ export const Signup = () => {
 
   const submitHandler = async(e) => {
     e.preventDefault();
-    console.log();
+    console.log(input);
   }
   return (
     <div>
