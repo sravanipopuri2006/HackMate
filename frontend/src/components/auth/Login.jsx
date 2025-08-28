@@ -7,6 +7,22 @@ import { Button } from '../ui/button'
 import { Link } from 'react-router-dom'
 
 export const Login = () => {
+  const {input, setInput} = useState({
+    fullname : "",
+    email:"",
+    phoneNumber:"",
+    password:"",
+    role:"",
+    file:""
+  });
+
+  const changeEventHandler = (e) => {
+    setInput({...input, [e.target.name]:e.target.value});
+  }
+
+  const changeFileHandler = (e) => {
+    setInput({...input, file:e.target.files?.[0]});
+  }
   
   return (
     <div>

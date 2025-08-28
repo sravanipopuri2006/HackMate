@@ -7,51 +7,72 @@ import { Button } from '../ui/button'
 import { Link } from 'react-router-dom'
 
 export const Signup = () => {
+      const {input, setInput} = useState({
+    fullname : "",
+    email:"",
+    phoneNumber:"",
+    password:"",
+    role:"",
+    file:""
+  });
+
+  const changeEventHandler = (e) => {
+    setInput({...input, [e.target.name]:e.target.value});
+  }
+
+  const changeFileHandler = (e) => {
+    setInput({...input, file:e.target.files?.[0]});
+  }
+
+  const submitHandler = async(e) => {
+    e.preventDefault();
+    console.log();
+  }
   return (
     <div>
         <Navbar/>
     <div className='flex items-center justify-center max-w-7xl mx-auto'>
-        <form action="" className='w-1/2 border border-gray-200 rounded-md p-4 my-10'>
+        <form onSubmit={submitHandler} action="" className='w-1/2 border border-gray-200 rounded-md p-4 my-10'>
             <h1 className='font-bold text-xl mb-5'>Sign up</h1>
             <div className='my-2'>
                 <Label>Full Name</Label>
-                <Input type="text" placeholder="Enter Your Name" className='my-2'></Input>
+                <Input type="text" value={input.fullname} name="fullname" onChange= {changeEventHandler} placeholder="Enter Your Name" className='my-2'></Input>
 
 
             </div>
             <div className='my-2'>
                 <Label>Email</Label>
-                <Input type="email" placeholder="Enter your Email" className='my-2'></Input>
+                <Input type="email" value={input.email} name="email" onChange = {changeEventHandler} placeholder="Enter your Email" className='my-2'></Input>
 
 
             </div>
             <div className='my-2'>
                 <Label>Phone Number</Label>
-                <Input type="text" placeholder="Enter your Phone Number" className='my-2'></Input>
+                <Input type="text" value = {input.phoneNumber} name = "phoneNumber" onChange = {changeEventHandler} placeholder="Enter your Phone Number" className='my-2'></Input>
 
 
             </div>
             <div className='my-2'>
                 <Label>Password</Label>
-                <Input type="password" placeholder="Enter your password" className='my-2'></Input>
+                <Input type="password" value = {input.password} name = "password" onChange = {changeEventHandler} placeholder="Enter your password" className='my-2'></Input>
 
 
             </div>
             <div className='flex items-center justify-between'>
                <RadioGroup className='flex items-center gap-4 my-5'>
                 <div className="flex items-center space-x-2">
-                    <input type="radio" name='role' value='hackLead' className='cursor-pointer'/>
+                    <input type="radio" name='role' value='hackLead' checked={input.role=='hackLead'} onChange = {changeEventHandler} className='cursor-pointer'/>
                     <Label htmlFor="r1">Hack Lead</Label>
                 </div>
                 <div className="flex items-center space-x-2">
-                    <input type="radio" name='role' value='hackApplicant' className='cursor-pointer'/>
+                    <input type="radio" name='role' value='hackApplicant' checked={input.role=='hackApplicant'} onChange = {changeEventHandler} className='cursor-pointer'/>
                     
                     <Label htmlFor="r2">Hack Applicant</Label>
                 </div>
                 </RadioGroup>
                 <div>
                     <Label className='my-2'>Profile</Label>
-                    <Input accept="image/*" type="file" className="cursor-pointer"/>
+                    <Input accept="image/*" type="file" onChange = {changeFileHandler} className="cursor-pointer"/>
                 </div>
 
 
