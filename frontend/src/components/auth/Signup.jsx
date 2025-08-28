@@ -26,8 +26,28 @@ export const Signup = () => {
 
   const submitHandler = async(e) => {
     e.preventDefault();
-    console.log(input);
+    const formData = new FormData();
+    
+    formData.append('fullname', input.fullname);
+    formData.append('email', input.email);
+    formData.append('phoneNumber', input.phoneNumber);
+    formData.append('password', input.password);
+    formData.append('role', input.role);
+    if (input.file){
+        formData.append('file', input.file);
+    }
+    try{
+        const res = await axios.post('${USER_API_END_POINT}/register',formData,{
+        headers:{
+            "Content-Type" : "multipart/form-data"
+        },
+        withCredentials:true,
+    });
+}
+    catch(error){
+    console.log(error);
   }
+}
   return (
     <div>
         <Navbar/>
