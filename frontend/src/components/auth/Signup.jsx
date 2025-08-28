@@ -57,8 +57,8 @@ export const Signup = () => {
 
 
             </div>
-            <Button type="submit" className='w-full my-4'>Signup</Button>
-            <span className='text-sm'>Already have an account? <Link to="/login">Login</Link></span>
+            <Button type="submit" className='w-full my-4 cursor-pointer'>Signup</Button>
+            <span className='text-sm'>Already have an account? <Link to="/login" className='text-blue-600'>Login</Link></span>
         </form>
     </div>
     </div>
