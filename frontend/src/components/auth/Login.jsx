@@ -11,6 +11,7 @@ import { USER_API_END_POINT } from '@/utils/constant'
 import { useDispatch, useSelector } from 'react-redux'
 import { setLoading } from '@/redux/authSlice'
 import { Loader2 } from 'lucide-react'
+import store from '@/redux/store'
 
 export const Login = () => {
   const [input, setInput] = useState({
@@ -93,7 +94,7 @@ export const Login = () => {
 
             </div>
             {
-loading? <Button><Loader2 className='mr2- h-4 w-4 animate-spin'/>Please wait </Button>: <Button type="submit" className='w-full my-4 cursor-pointer'>Login</Button>
+loading? <Button className='w-full my-4 cursor-pointer '><Loader2 className='mr2- h-4 w-4 animate-spin'/>Please wait </Button>: <Button type="submit" className='w-full my-4 cursor-pointer'>Login</Button>
             }
             
             <span className='text-sm'>Don't have an account? <Link to="/signup" className='text-blue-600'>Sign up</Link></span>
