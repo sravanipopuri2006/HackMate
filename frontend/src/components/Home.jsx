@@ -2,6 +2,8 @@ import React from 'react'
 import Navbar from './shared/Navbar'
 import HeroSection from './HeroSection'
 import CategoryCarousel from './CategoryCarousel'
+import LatestTeams from './LatestTeams'
+import Footer from './shared/Footer'
 
 export default function Home() {
   return (
@@ -9,8 +11,8 @@ export default function Home() {
     <Navbar/>
     <HeroSection/>
     <CategoryCarousel/>
-    {/* <LatestTeams/>
-    <Footer/> */}
+    <LatestTeams/>
+    <Footer/> 
 
 
     </>
