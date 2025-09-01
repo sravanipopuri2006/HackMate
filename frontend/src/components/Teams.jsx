@@ -2,7 +2,7 @@ import React from 'react'
 import Navbar from './shared/Navbar'
 import { FilterCard } from './FilterCard'
 import { Team } from './Team'
-const TeamsArray = [1, 2, 3, 4, 5, 6, 7, 8]
+const TeamsArray = [1, 2, 3, 4, 5, 6, 7, 8];
 
 export default function Teams() {
   return (
