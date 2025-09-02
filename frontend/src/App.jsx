@@ -7,6 +7,7 @@ import { Signup } from './components/auth/Signup'
 import Home from './components/Home'
 import Teams from './components/Teams'
 import Browse from './components/Browse'
+import Profile from './components/Profile'
 const appRouter=createBrowserRouter([{
   path:'/',
   element:<Home/>
@@ -20,9 +21,17 @@ const appRouter=createBrowserRouter([{
   path:'/teams',
   element:<Teams/>
 },{
-  path:'browse',
+  path:'/browse',
   element:<Browse/>
-}])
+},{
+  path:'/profile',
+  element:<Profile/>
+},
+
+
+
+
+])
 
 
 
