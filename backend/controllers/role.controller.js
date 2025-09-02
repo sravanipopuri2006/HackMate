@@ -1,9 +1,9 @@
 import { Role } from "../models/role.model.js";
 export const postRole = async (req, res) => {
     try {
-        const { title, description, requirements, hackathonLevel, position,hackTeamId,experienceLevel} = req.body;
+        const { title, description, requirements, hackathonName,hackathonType, position,hackTeamId,experienceLevel} = req.body;
         const userId = req.id;
-        if (!title || !description || !requirements || !hackathonLevel || !position ||!hackTeamId) {
+        if (!title || !description || !requirements || !hackathonName || !position ||!hackTeamId|| !hackathonType || !experienceLevel) {
             return res.status(400).json({
                 message: "All fields are required",
                 success: false
@@ -13,8 +13,9 @@ export const postRole = async (req, res) => {
             title,
             description,
             requirements,
-            hackathonLevel,
+            hackathonName,
             position,
+            hackathonType,
           
             hackTeamId,
             userId,

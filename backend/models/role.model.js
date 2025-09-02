@@ -9,11 +9,18 @@ const roleSchema=new mongoose.Schema({
         required:true
     },
     requirements:[{type:String}],
-    hackathonLevel:{
+    hackathonName:{
         type:String,
         required:true
 
     },
+   
+    hackathonType:{
+        type:String,
+        required:true
+    },
+
+   
     position:{
         type:String,
         required:true

@@ -22,7 +22,7 @@ const Navbar = () => {
                       <li><Link to='/'>Home</Link></li>
                       <li><Link to='/teams'>Teams</Link></li>
                       <li>Hackathons</li>
-                      <li>Browse</li>
+                      <li><Link to='/browse'>Browse</Link></li>
                   </ul>
                   {
                       !user ? (
