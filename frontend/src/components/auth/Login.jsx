@@ -43,13 +43,17 @@ export const Login = () => {
         withCredentials:true,
     });
     if(res.data.success){
+        dispatch(setUser(res.data.user));
         navigate("/");
         toast.success(res.data.message);
     }
 }
-    catch(error){
-    console.log(error);
-    toast.error(error.response.data.message);
+    catch (error) {
+  console.log(error);
+  const message = error.response?.data?.message || error.message || "Something went wrong!";
+  toast.error(message);
+
+
   } finally{
     dispatch(setLoading(false));
   }
