@@ -34,7 +34,7 @@ const Profile = () =>{
                     </div>
                     <div className='flex items-center gap-3 my-2'>
                         <Contact/>
-                        <span>1234567890</span>
+                        <span>9876543210</span>
                     </div>
                 </div>
                 <div className='my-5'>
@@ -53,7 +53,7 @@ const Profile = () =>{
                 </div>
             </div>
             <div className='max-w-4xl mx-auto bg-white rounded-2xl'>
-                    <h1>Registered Teams</h1>
+                    <h1 className="font-bold-text-lg">Registered Teams</h1>
                     {/* Application Table */}
                     <RegisteredTeamsTable/>
 
