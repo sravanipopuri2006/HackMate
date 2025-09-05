@@ -21,7 +21,12 @@ const appRouter=createBrowserRouter([{
 },{
   path:'/teams',
   element:<Teams/>
-},{
+},
+{
+  path:'/description/:id',
+  element:<TeamsDescription/>
+},
+{
   path:'/browse',
   element:<Browse/>
 },{

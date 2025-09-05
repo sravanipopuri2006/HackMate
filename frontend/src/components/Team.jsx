@@ -3,8 +3,11 @@ import { Button } from './ui/button'
 import { Bookmark } from 'lucide-react'
 import { Badge } from './ui/badge'
 import { Avatar, AvatarImage } from './ui/avatar'
+import { useNavigate } from 'react-router-dom'
 
 export const Team = () => {
+  const navigate = useNavigate(); 
+  const teamId = "dnvfdyugeryf"; // Replace with actual team ID
   return (
     <div className='w-full max-w-lg p-5 rounded-md shadow-xl bg-white border border-gray-100 overflow-x-hidden'>
       {/* Top Row */}
@@ -48,7 +51,7 @@ export const Team = () => {
 
       {/* Actions */}
       <div className='flex flex-wrap items-center gap-4 mt-4'>
-        <Button variant='outline'>Details</Button>
+        <Button onClick={()=>navigate('/description/${teamId}')} variant='outline'>Details</Button>
         <Button className="bg-[#7209b7] text-white">Save for Later</Button>
       </div>
     </div>
