@@ -59,7 +59,7 @@ const Profile = () => {
 
         <div className="flex flex-wrap gap-2">
           {user?.profile?.skills
-            ? user?.profile?.skills[0].split(" ").map((skill, index) => (
+            ? user?.profile?.skills[0]?.split(" ").map((skill, index) => (
               <Badge key={index}>{skill}</Badge>
             ))
             : <span>NA</span>}
@@ -71,10 +71,10 @@ const Profile = () => {
           {isResume 
             ? <a 
                 target="blank" 
-                href="https://www.youtube.com/@krithickvivek" 
+                href={user?.profile?.resume} 
                 className='text-blue-500 w-full hover:underline cursor-pointer'
               >
-                Krithick
+                {user?.profile?.resumeOriginalName}
               </a> 
             : <span>NA</span>}
         </div>

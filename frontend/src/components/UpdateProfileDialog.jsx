@@ -11,10 +11,10 @@ import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { Loader2 } from "lucide-react";
 import { useSelector, useDispatch } from "react-redux";
-import { USER_API_END_POINT } from "@/utils/constant";
+import { USER_API_END_POINT } from "@/utils/constant.js";
 import { toast } from "sonner";
 import axios from "axios";
-import { setUser } from "@/redux/authSlice"; // adjust path if different
+import { setUser } from "@/redux/authSlice.js"; // adjust path if different
 
 export default function UpdateProfileDialog({ open, setOpen }) {
   const [loading, setLoading] = useState(false);
@@ -57,6 +57,7 @@ export default function UpdateProfileDialog({ open, setOpen }) {
     }
 
     try {
+      setLoading(true);
       const res = await axios.post(
         `${USER_API_END_POINT}/profile/update`,
         formData,
@@ -67,6 +68,7 @@ export default function UpdateProfileDialog({ open, setOpen }) {
           withCredentials: true,
         }
       );
+   
 
       if (res.data.success) {
         console.log(input);
@@ -74,6 +76,7 @@ export default function UpdateProfileDialog({ open, setOpen }) {
         toast.success("Profile updated successfully!");
         setOpen(false);
       }
+      
     } catch (error) {
       console.error(error);
       toast.error(error.response?.data?.message || "Update failed!");

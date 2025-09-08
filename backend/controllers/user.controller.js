@@ -1,6 +1,13 @@
 import { User } from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import getDataUri from "../utils/datauri.js";
+import cloudinary from "../utils/cloudinary.js";
+
+
+
+
+
 
 export const register = async (req, res) => {
     try {
@@ -113,17 +120,35 @@ export const logout = async(req,res)=>
         console.log(error);
     }
 }
+
 export const updateProfile = async(req,res) => {
     try{
         const {fullname,email,phoneNumber,bio,skills}=req.body;
         console.log(fullname,email,phoneNumber,bio,skills);
         const file = req.file;
+        if(!file){
+            return null;
+        }
+        const fileUri=getDataUri(file);
+        const cloudResponse = await cloudinary.uploader.upload(fileUri.content, {
+  resource_type: "auto", // detects PDF automatically
+  folder: "resumes",
+  access_mode: "public", // ensures public link
+});
+   
+        
+
+
+
+        
+
+
       
 
-        // cloudinary comes here
+        
         let skillsArray;
         if(skills){
-            skillsArray = skills.split(",");
+            skillsArray = skills.split(" ");
 
         }
 
@@ -144,6 +169,11 @@ export const updateProfile = async(req,res) => {
         if(phoneNumber)user.phoneNumber=phoneNumber
         if(bio)user.profile.bio=bio
         if(skills)user.profile.skills=skillsArray
+        if(cloudResponse){
+            user.profile.resume=cloudResponse.secure_url  //saves the cloudinary url
+            user.profile.resumeOriginalName=file.originalname
+            console.log(cloudResponse.secure_url); // PDF link
+        }
 
         // resume comes later here...
         await user.save();
@@ -161,6 +191,7 @@ export const updateProfile = async(req,res) => {
             user,
             success:true
         });
+
     }
     catch(error)
     {
