@@ -9,6 +9,7 @@ import Home from './components/Home'
 import Teams from './components/Teams'
 import Browse from './components/Browse'
 import Profile from './components/Profile'
+import TeamsDescription from './components/TeamsDescription'
 const appRouter=createBrowserRouter([{
   path:'/',
   element:<Home/>

@@ -1,6 +1,7 @@
-import { Table } from 'lucide-react'
+import { Table } from './ui/table'
 import React from 'react'
-import { TableBody, TableHead } from './ui/table'
+import { TableBody, TableCaption, TableCell, TableHead ,TableHeader, TableRow} from './ui/table'
+import { Badge } from './ui/badge'
 
 const RegisteredTeamsTable = () => {
     return(

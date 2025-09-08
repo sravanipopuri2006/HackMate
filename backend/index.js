@@ -8,6 +8,7 @@ import teamRoute from "./routes/hackteam.route.js";
 import roleRoute from "./routes/role.route.js";
 import applicationRoute from "./routes/application.route.js"
 
+
 dotenv.config({});
 
 const app=express();

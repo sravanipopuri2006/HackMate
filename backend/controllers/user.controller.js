@@ -116,6 +116,7 @@ export const logout = async(req,res)=>
 export const updateProfile = async(req,res) => {
     try{
         const {fullname,email,phoneNumber,bio,skills}=req.body;
+        console.log(fullname,email,phoneNumber,bio,skills);
         const file = req.file;
       
 
@@ -127,7 +128,7 @@ export const updateProfile = async(req,res) => {
         }
 
         
-        const userId=req.id; //middleware authentication
+        const userId = req.id;
         let user=await User.findById(userId);
         if(!user)
         {
@@ -159,7 +160,7 @@ export const updateProfile = async(req,res) => {
             message:"Profile updated successfully.",
             user,
             success:true
-        })
+        });
     }
     catch(error)
     {
