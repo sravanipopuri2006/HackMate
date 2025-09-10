@@ -59,7 +59,7 @@ const Profile = () => {
 
         <div className="flex flex-wrap gap-2">
           {user?.profile?.skills
-            ? user?.profile?.skills[0]?.split(" ").map((skill, index) => (
+            ? user?.profile?.skills[0]?.split(",").map((skill, index) => (
               <Badge key={index}>{skill}</Badge>
             ))
             : <span>NA</span>}
@@ -85,7 +85,7 @@ const Profile = () => {
         <RegisteredTeamsTable />
       </div>
 
-      {/* Update Profile Dialog */}
+      
       <UpdateProfileDialog open={open} setOpen={setOpen} />
     </div>
   )

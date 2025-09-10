@@ -26,8 +26,7 @@ export default function UpdateProfileDialog({ open, setOpen }) {
     email: user?.email || "",
     phoneNumber: user?.phoneNumber || "",
     bio: user?.profile?.bio || "",
-    skills: user?.profile?.skills?.join(" ") || "",
-    file: null,
+    skills: user?.profile?.skills?.join(",") || "",
   });
 
   // handle input change
@@ -172,8 +171,9 @@ export default function UpdateProfileDialog({ open, setOpen }) {
                   className="col-span-3"
                   type="file"
                   accept="application/pdf"
-                  onChange={fileHandler}
+                  onChange={fileHandler} required
                 />
+                
               </div>
             </div>
 
