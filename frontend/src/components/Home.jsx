@@ -4,8 +4,11 @@ import HeroSection from './HeroSection'
 import CategoryCarousel from './CategoryCarousel'
 import LatestTeams from './LatestTeams'
 import Footer from './shared/Footer'
+import useGetAllTeams from '@/hooks/useGetAllTeams'
 
 export default function Home() {
+  useGetAllTeams();
+
   return (
     <>
     <Navbar/>
