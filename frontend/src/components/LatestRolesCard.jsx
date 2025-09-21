@@ -1,7 +1,7 @@
 import React from 'react'
 import { Badge } from './ui/badge'
 
-export default function LatestTeamsCard() {
+export default function LatestRolesCard() {
   return (
     <div className='p-5 rounded-md shadow-xl bg-white border border-gray-100 cursor-pointer'>
         <div>
