@@ -7,34 +7,57 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { setSingleRole } from "@/redux/roleSlice";
-import { ROLE_API_END_POINT } from "@/utils/constant";
+import { APPLICATION_API_END_POINT, ROLE_API_END_POINT } from "@/utils/constant";
+import { toast } from "sonner";
+import { useState } from "react";
+
 
 const TeamsDescription = ({role}) => {
     const {singleRole}=useSelector(store=>store.role);
     const user=useSelector(store=>store.user);
-
-    const isApplied = user?._id
+    const isInitiallyApplied = user?._id
   ? singleRole?.applications?.some(app => 
       app.hackApplicant?.toString() === user._id ||  
       app.hackApplicant?._id?.toString() === user._id 
     )
   : false;
-
+    const [isApplied,setIsApplied] = useState(isInitiallyApplied);
     console.log(isApplied);
+  
 
   const params=useParams();
   const roleId=params.id;
   const dispatch=useDispatch();
   
-
+  const applyRoleHandler = async()=>
+  {
+    try{
+      const res = await axios.get(`${APPLICATION_API_END_POINT}/apply/${roleId}`,{withCredentials:true})
+      console.log(res)      
+      console.log(res.data)
+      if(res.data.success)
+      {
+        setIsApplied(true); //update the local state
+        const updateSingleRole = {...singleRole, applications:[...singleRole.applications,{hackApplicant:user?._id}]}
+        dispatch(setSingleRole(updateSingleRole)); // helps real time UI update
+        toast.success(res.data.message)
+      }
+    }
+    catch(error)
+    {
+      console.log(error);
+      toast.error(error.response.data.message);
+    }
+  }
 
   useEffect(() => {
         const fetchSingleRole = async () => {
             try {
                 const res = await axios.get(`${ROLE_API_END_POINT}/get/${roleId}`, {withCredentials: true});
-                console.log(res);
+              
                 if (res.data.success){
                     dispatch(setSingleRole(res.data.role));
+                    setIsApplied(res.data.role.applications.some(application=>application.hackApplicant === user?._id)) // ensure the state is in sync with fetched data
                 }
             } catch (error) {
                 console.error('Error fetching roles:', error);
@@ -65,6 +88,7 @@ const TeamsDescription = ({role}) => {
             </div>
           </div>
           <Button
+          onClick={isApplied ? null : applyRoleHandler}
             disabled={isApplied}
             className={`px-6 py-2 rounded-xl shadow-md transition-all ${
               isApplied

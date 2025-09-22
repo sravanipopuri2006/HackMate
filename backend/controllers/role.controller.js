@@ -60,7 +60,9 @@ export const getAllRoles = async (req, res) => {
 export const getRoleById = async (req, res) => {
     try {
         const roleId = req.params.id;
-        const role = await Role.findById(roleId);
+        const role = await Role.findById(roleId).populate({
+            path:"applications"
+        });
         if (!role) {
             return res.status(404).json({
                 message: "Role not found",
