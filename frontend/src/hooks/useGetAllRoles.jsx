@@ -11,7 +11,7 @@ const useGetAllRoles = () => {
             try {
                 const res = await axios.get(`${ROLE_API_END_POINT}/get`, {withCredentials: true});
                 if (res.data.success){
-                    dispatch(setAllRoles(res.data.role));
+                    dispatch(setAllRoles(res.data.roles));
                 }
             } catch (error) {
                 console.error('Error fetching roles:', error);

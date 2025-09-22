@@ -5,20 +5,27 @@ import { Badge } from './ui/badge'
 import { Avatar, AvatarImage } from './ui/avatar'
 import { useNavigate } from 'react-router-dom'
 
-export const Team = () => {
+export const Team = ({role}) => {
   const navigate = useNavigate(); 
-  const teamId = "dnvfdyugeryf"; // Replace with actual team ID
+  const teamId = "dnvfdyugeryf"; 
+  const getTime=(mongoTime)=>{
+    const createdAt=new Date(mongoTime);
+    const currentTime=new Date();
+    const timeDifference=currentTime-createdAt;
+    return Math.floor(timeDifference/(1000*24*60*60));
+
+  }
   return (
     <div className='w-full max-w-lg p-5 rounded-md shadow-xl bg-white border border-gray-100 overflow-x-hidden'>
       {/* Top Row */}
       <div className='flex items-center justify-between'>
-        <p className='text-sm text-gray-500'>2 days ago</p>
+        <p className='text-sm text-gray-500'>{getTime(role?.createdAt)==0?"Today":`${getTime(role?.createdAt)} days ago`}</p>
         <Button variant="outline" className='rounded-full' size="icon">
           <Bookmark />
         </Button>
       </div>
 
-      {/* Team Info */}
+   
       <div className='flex items-center gap-3 my-3'>
         <Avatar className="w-12 h-12">
           <AvatarImage
@@ -27,31 +34,28 @@ export const Team = () => {
           />
         </Avatar>
         <div>
-          <h1 className='font-medium text-lg'>Team Name</h1>
+          <h1 className='font-medium text-lg'>{role?.hackTeam?.name}</h1>
           <p className='text-sm text-gray-500'>Saveetha Engineering College</p>
         </div>
       </div>
 
-      {/* Project Info */}
+    
       <div>
-        <h1 className='font-bold text-lg my-2'>Title</h1>
+        <h1 className='font-bold text-lg my-2'>{role?.title}</h1>
         <p className='text-sm text-gray-600 break-words'>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum magnam,
-          deserunt enim eligendi fuga commodi porro, non corrupti magni ipsam iure
-          assumenda soluta asperiores, beatae ipsa? Nobis dolores officia veritatis?
+          {role?.description}
         </p>
       </div>
 
-      {/* Tags */}
       <div className='flex flex-wrap items-center gap-2 mt-4'>
-        <Badge className='text-blue-700 font-bold' variant='ghost'>2 positions</Badge>
-        <Badge className='text-[#F83002] font-bold' variant='ghost'>Smart India Hackathon</Badge>
-        <Badge className='text-[#7209b7] font-bold' variant='ghost'>Intermediate</Badge>
+        <Badge className='text-blue-700 font-bold' variant='ghost'>Position: {role?.position}</Badge>
+        <Badge className='text-[#F83002] font-bold' variant='ghost'>{role?.hackathonName}</Badge>
+        <Badge className='text-[#7209b7] font-bold' variant='ghost'>{role?.experienceLevel}</Badge>
       </div>
 
-      {/* Actions */}
+
       <div className='flex flex-wrap items-center gap-4 mt-4'>
-        <Button onClick={()=>navigate('/description/${teamId}')} variant='outline'>Details</Button>
+        <Button onClick={()=>navigate(`/description/${role._id}`)} variant='outline'>Details</Button>
         <Button className="bg-[#7209b7] text-white">Save for Later</Button>
       </div>
     </div>
