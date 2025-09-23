@@ -10,10 +10,10 @@ export const applyRole=async(req,res)=>{
                 success:false
             });
         }
-        const existingApplication=await Application.findOne({role:roleId,hackapplicant:userId});
+        const existingApplication=await Application.findOne({role:roleId,hackApplicant:userId});
         if(existingApplication){
             return res.status(400).json({
-                message:"You hava already applied for this role",
+                message:"You have already applied for this role",
                 success:false
             });
         }
@@ -43,6 +43,10 @@ export const applyRole=async(req,res)=>{
         console.log(error);
     }
 };
+
+
+
+
 export const getAppliedRole=async(req,res)=>{
     try{
         const userId=req.id;

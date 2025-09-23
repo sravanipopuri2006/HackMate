@@ -57,7 +57,7 @@ const TeamsDescription = ({role}) => {
               
                 if (res.data.success){
                     dispatch(setSingleRole(res.data.role));
-                    setIsApplied(res.data.role.applications.some(application=>application.hackApplicant === user?._id)) // ensure the state is in sync with fetched data
+                    setIsApplied(res.data.role.applications.some(application=>application.hackApplicant.toString() === user?._id.toString())) // ensure the state is in sync with fetched data
                 }
             } catch (error) {
                 console.error('Error fetching roles:', error);
