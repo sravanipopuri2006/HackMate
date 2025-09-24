@@ -34,13 +34,11 @@ const appRouter=createBrowserRouter([{
   path:'/profile',
   element:<Profile/>
 },
-
-
-
-
+{
+  path:"/admin/teams",
+  element:<Teams/>
+}
 ])
-
-
 
 function App() {
   const [count, setCount] = useState(0)
