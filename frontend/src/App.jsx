@@ -35,8 +35,8 @@ const appRouter=createBrowserRouter([{
   element:<Profile/>
 },
 {
-  path:"/admin/teams",
-  element:<Teams/>
+  path:"/admin/XXXX",
+  element:<XXXX/>
 }
 ])
 
