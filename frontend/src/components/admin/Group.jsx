@@ -2,9 +2,9 @@ import React from 'react'
 import Navbar from '../shared/Navbar'
 import { Input } from '../ui/input'
 import { Button } from '../ui/button'
-import XXXXTable from './XXXXTable'
+import GroupTable from './GroupTable'
 
-const XXXX = () => {
+const Group = () => {
   return (
     <div>
       <Navbar/>
@@ -13,12 +13,12 @@ const XXXX = () => {
            <Input
               className = "w-fit"
               placeholder = "Filter by name"/>
-           <Button>New XXXX</Button>
+           <Button>New Team</Button>
         </div>
-        <XXXXTable/>
+        <GroupTable/>
       </div>
     </div>
   )
 }
 
-export default XXXX
+export default Group;
