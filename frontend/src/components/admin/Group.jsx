@@ -3,8 +3,10 @@ import Navbar from '../shared/Navbar'
 import { Input } from '../ui/input'
 import { Button } from '../ui/button'
 import GroupTable from './GroupTable'
+import { useNavigate } from 'react-router-dom'
 
 const Group = () => {
+  const navigate = useNavigate();
   return (
     <div>
       <Navbar/>
@@ -13,7 +15,7 @@ const Group = () => {
            <Input
               className = "w-fit"
               placeholder = "Filter by name"/>
-           <Button>New Team</Button>
+           <Button onClick={()=>navigate("/admin/hackteam/create")}>New Team</Button>
         </div>
         <GroupTable/>
       </div>
