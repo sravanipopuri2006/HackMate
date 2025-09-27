@@ -1,4 +1,7 @@
 import { HackTeam } from "../models/hackteam.model.js";
+import getDataUri from "../utils/datauri.js";
+import cloudinary from "../utils/cloudinary.js";
+
 export const registerTeam=async(req,res)=>{
     try{
         const{teamName}=req.body;
@@ -84,7 +87,12 @@ export const updateProfile=async(req,res)=>{
     try{
         const {name,description,website,hackathonlevel}=req.body;
         const file=req.file;
-        const updateData={name,description,website,hackathonlevel};
+        const fileUri = getDataUri(file);
+        // upload to cloudinary
+        const cloudResponse=await cloudinary.uploader.upload(fileUri.content);
+        const logo = cloudResponse.secure_url;
+        
+        const updateData={name,description,website,hackathonlevel,logo};
         const team=await HackTeam.findByIdAndUpdate(req.params.id,updateData,{new:true});
         if(!team){
             return res.status(404).json({

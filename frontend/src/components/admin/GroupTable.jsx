@@ -6,6 +6,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@radix-ui/react-popover
 import { MoreHorizontal, Edit2 } from 'lucide-react'
 
 const GroupTable = () => {
+    const {hackteam}=useSelector((state)=>state.hackteam);
     return (
         <div>
             <Table>
@@ -19,8 +20,19 @@ const GroupTable = () => {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
+                    {
+                        hackteam.length <= 0 ? <span>You havent registered any team yet</span> : (
+                            <>
+                            {
+                                hackteam.map((team)=>{
+                                    return (
+                                        <></>
+                                    )
 
-                    <TableRow>
+                                })
+
+                            }
+                            <TableRow>
                         <TableCell>
                             <Avatar >   
                                 <AvatarImage
@@ -45,6 +57,10 @@ const GroupTable = () => {
                         </TableCell>
 
                     </TableRow>
+                            </>
+                        )
+                    }
+                    
 
 
                 </TableBody>

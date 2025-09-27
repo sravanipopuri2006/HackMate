@@ -1,7 +1,7 @@
 import express from "express";
 import { getTeamById, registerTeam,getTeam,updateProfile } from "../controllers/hackteam.controller.js";
 import isAuthenticated from "../middlewares/isAuthenticated.js";
-import singleUpload from "../middlewares/multer.js"
+import {singleUpload} from "../middlewares/multer.js"
 
 
 const router = express.Router();
