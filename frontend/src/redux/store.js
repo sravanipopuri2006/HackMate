@@ -1,6 +1,7 @@
 import {combineReducers, configureStore} from '@reduxjs/toolkit';
 import authSlice from './authSlice';
 import roleSlice from './roleSlice';
+import teamSlice from './teamSlice';
 import {
   persistStore,
   persistReducer,
@@ -20,7 +21,8 @@ const persistConfig = {
 }
 const rootReducer = combineReducers({
     auth:authSlice,
-    role:roleSlice
+    role:roleSlice,
+    hackteam:teamSlice
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

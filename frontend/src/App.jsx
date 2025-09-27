@@ -12,6 +12,7 @@ import Profile from './components/Profile'
 import TeamsDescription from './components/TeamsDescription'
 import Group from './components/admin/Group'
 import GroupCreate from './components/admin/GroupCreate'
+import GroupSetup from './components/admin/GroupSetup'
 const appRouter=createBrowserRouter([{
   path:'/',
   element:<Home/>
@@ -43,6 +44,9 @@ const appRouter=createBrowserRouter([{
 {
   path:"/admin/hackteam/create",
   element:<GroupCreate/>
+},{
+  path:"/admin/hackteam/:id",
+  element:<GroupSetup/>
 }
 ])
 

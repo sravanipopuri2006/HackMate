@@ -1,13 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Navbar from '../shared/Navbar'
 import { Label } from '../ui/label'
 import { Input } from '../ui/input'
 import { Button } from '../ui/button'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { setSingleTeam } from '@/redux/teamSlice'
+import axios from 'axios'
+import { TEAM_API_END_POINT } from '@/utils/constant'
+import { toast } from 'sonner'
 
 const GroupCreate = () => {
     const navigate = useNavigate(); 
-    const [teamName, setTeamName] = useState();
+    const [teamName, setTeamName] = useState("");
+    const dispatch=useDispatch();
     const registerNewTeam = async () => {
         try{
             const res = await axios.post(`${TEAM_API_END_POINT}/register`,{teamName}, {
@@ -17,8 +23,10 @@ const GroupCreate = () => {
             withCredentials: true
             });
             if (res?.data?.success) {
+                dispatch(setSingleTeam(res.data.hackTeam));
+                    
                     toast.success(res.data.message);
-                    const teamId = res?.data?.team?._id;
+                    const teamId = res?.data?.hackTeam?._id;
                     navigate(`/admin/hackteam/${teamId}`);
             }
         }
