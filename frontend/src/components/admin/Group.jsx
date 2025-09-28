@@ -4,8 +4,10 @@ import { Input } from '../ui/input'
 import { Button } from '../ui/button'
 import GroupTable from './GroupTable'
 import { useNavigate } from 'react-router-dom'
+import useGetAllTeams from '@/hooks/useGetAllTeams'
 
 const Group = () => {
+  useGetAllTeams();
   const navigate = useNavigate();
   return (
     <div>

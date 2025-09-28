@@ -8,14 +8,14 @@ const teamSlice=createSlice({
         teams:[],
     },
     reducers:{
-        setSingleTeam:(state,action)=>{
+        setSingleGroup:(state,action)=>{
             state.singleTeam=action.payload;
         },
         setGroups:(state,action)=>{
-            state.hackteam=action.payload;
+            state.teams=action.payload;
         }
     }
 });
 
-export const {setSingleTeam,setGroups}=teamSlice.actions;
+export const {setSingleGroup,setGroups}=teamSlice.actions;
 export default teamSlice.reducer;
