@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Navbar from '../shared/Navbar'
 import { Button } from '../ui/button'
 import { ArrowLeft } from 'lucide-react'
@@ -7,7 +7,6 @@ import { Input } from '../ui/input'
 import { TEAM_API_END_POINT } from '@/utils/constant'
 import { useParams ,useNavigate} from 'react-router-dom'
 import { toast } from 'sonner'
-import { useSelector } from 'react-redux'
 
 export default function GroupSetup() {
   const [input, setInput] = useState({
@@ -18,7 +17,6 @@ export default function GroupSetup() {
     file: null
 
   });
-  const {singleTeam}=useSelector((state)=>state.hackteam);
   const navigate=useNavigate();
   const[loading,setLoading]=useState(false);
   const changeEventHandler = (e) => {
@@ -66,14 +64,14 @@ export default function GroupSetup() {
   }
   useEffect(()=>{
     setInput({
-      name: singleTeam.name ||"",
-    description: singleTeam.description ||"",
-    website: singleTeam.website ||"",
-    hackathonlevel: singleTeam.hackathonlevel ||"",
-    file: singleTeam.file ||null
+      name: "",
+    description: "",
+    website: "",
+    hackathonlevel: "",
+    file: null
 
-    });
-  },[singleTeam]);
+    })
+  })
 
   return (
     <div>
