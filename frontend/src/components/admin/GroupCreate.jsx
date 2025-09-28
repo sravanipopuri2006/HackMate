@@ -5,7 +5,7 @@ import { Input } from '../ui/input'
 import { Button } from '../ui/button'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { setSingleGroup } from '@/redux/teamSlice'
+import { setSingleTeam } from '@/redux/teamSlice'
 import axios from 'axios'
 import { TEAM_API_END_POINT } from '@/utils/constant'
 import { toast } from 'sonner'
@@ -23,7 +23,7 @@ const GroupCreate = () => {
             withCredentials: true
             });
             if (res?.data?.success) {
-                dispatch(setSingleGroup(res.data.hackteam));
+                dispatch(setSingleTeam(res.data.hackTeam));
                     
                     toast.success(res.data.message);
                     const teamId = res?.data?.hackTeam?._id;
