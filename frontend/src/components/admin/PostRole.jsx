@@ -6,6 +6,8 @@ import { Button } from '../ui/button';
 import { useSelector } from 'react-redux';
 import store from '@/redux/store';
 import { Select, SelectValue,SelectTrigger, SelectItem,SelectContent,SelectGroup } from '../ui/select';
+import { toast } from 'sonner';
+import { useNavigate } from 'react-router-dom';
 
 
 const roleArray=[];
@@ -23,6 +25,8 @@ export default function PostRole() {
         experienceLevel: "",
         hackTeamId: ""
     });
+    const {loading, setLoading} = useState(false);
+    const navigate = useNavigate();
     const {teams}=useSelector(store=>store.hackteam);
 
     const changeEventHandler = (e) => {
@@ -30,13 +34,31 @@ export default function PostRole() {
     };
 
     const selectChangeHandler=(value)=>{
-        const selectedTeam=teams.find((team)=>team.name.toLowerCase()===value);
-        setInput({...input,hackTeamId:selectedTeam._id});
+        const selectedTeam=teams.find((team)=>team.name.toLowerCase()==value);
+        setInput({ ...input, hackTeamId:selectedTeam._id});
     };
 
-    const submitHandler = (e) => {
+    const submitHandler = async (e) => {
                 e.preventDefault();
-                console.log(input);
+                try {
+                    setLoading(true);
+                    const res = await axios.post(`$(TEAM_API_END_POINT)/post`, input, {
+                        headers: {
+                            'Content-Type': 'application/json'
+                    },
+                
+                    withCredentials: true
+                });
+
+                if (res.data.success) {
+                    toast.success(res.data.message);
+                    navigate('admin/teams');
+                }
+            } catch (error) {
+                toast.error(error.response.data.message);
+            } finally {
+                setLoading(false);
+            }
     }
     return (
         <div>
@@ -101,7 +123,9 @@ export default function PostRole() {
 
 
                 </div>
-                <Button className='w-full wt-4 mt-4'>Announce New Role</Button>
+                {
+loading? <Button className='w-full my-4 cursor-pointer '><Loader2 className='mr2- h-4 w-4 animate-spin'/>Please wait </Button>: <Button type="submit" className='w-full my-4 cursor-pointer'>Announce New Role</Button>
+            }
                 {
                     roleArray.length==0 && <p className='text-xs text-red-600 font-bold text-center my-3'>*Please Register the Team to Post the Role</p>
                 }
