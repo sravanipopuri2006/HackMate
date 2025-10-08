@@ -6,69 +6,68 @@ import { Popover, PopoverContent, PopoverTrigger } from '@radix-ui/react-popover
 import { MoreHorizontal, Edit2 } from 'lucide-react'
 import { useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
-import useGetTeamById from '@/hooks/useGetTeamById'
 
 
 
-const GroupTable = () => {
+
+const RolesTable = () => {
+
     
 
-    const { teams, searchTeamByText } = useSelector(store => store.hackteam);
-    const [filteredTeam, setFilterTeam] = useState(teams);
+    
+
+    const {allAdminRoles,searchRoleByText}=useSelector(store=>store.role);
+    const [filterRole, setFilterRole] = useState(allAdminRoles);
     const navigate = useNavigate();
     useEffect(() => {
-        const filteredTeam = teams.length >= 0 && teams.filter((team) => {
-            if (!searchTeamByText) {
+        const filteredTeam = allAdminRoles.length >= 0 && allAdminRoles.filter((role) => {
+            if (!searchRoleByText) {
                 return true;
             };
-            return team?.name?.toLowerCase().includes(searchTeamByText.toLowerCase())
+            return role?.name?.toLowerCase().includes(searchRoleByText.toLowerCase())||role?.hackathonName?.toLowerCase().includes(searchRoleByText.toLowerCase())||role?.title?.toLowerCase().includes(searchRoleByText.toLowerCase());
         });
-        setFilterTeam(filteredTeam);
+        setFilterRole(filteredTeam);
 
 
 
-    }, [teams, searchTeamByText])
+    }, [allAdminRoles, searchRoleByText])
 
-    console.log(teams);
+
+   
     return (
         <>
             <Table>
-                <TableCaption>A list of your recently registered Teams</TableCaption>
+                <TableCaption>A list of your recently Posted Roles For Hackathons</TableCaption>
                 <TableHeader>
                     <TableRow>
-                        <TableHead>Logo</TableHead>
-                        <TableHead>Name</TableHead>
+                        <TableHead>Hackathon Name</TableHead>
+                        <TableHead>Team Name</TableHead>
+                        <TableHead>Role</TableHead>
                         <TableHead>Date</TableHead>
                         <TableHead className='text-right'>Action</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
                     {
-                        filteredTeam.length <= 0 ?
+                        filterRole.length <= 0 ?
                             <TableRow>
                                 <TableCell colSpan={4} className="text-center">
                                     You Haven't registered any teams Yet
                                 </TableCell></TableRow> : (
                                 <>
                                     {
-                                        filteredTeam?.map((team) => {
+                                        filterRole?.map((team) => {
                                             return (
 
                                                 <>
                                                     <TableRow key={team._id}>
                                                         <TableCell>
-                                                            <div className="flex items-center">
-                                                                <div className="w-12 h-12 rounded-full overflow-hidden border border-gray-200 shadow-sm">
-                                                                    <img
-                                                                        src={team.logo}
-                                                                        alt={team.name}
-                                                                        className="w-full h-full object-cover"
-                                                                    />
-                                                                </div>
-                                                            </div>
+                                                            {team.hackathonName}
                                                         </TableCell>
 
-                                                        <TableCell>{team.name}</TableCell>
+                                                        
+                                                        <TableCell>{team.hackTeamId?.name}</TableCell>
+                                                        <TableCell>{team.title}</TableCell>
                                                         <TableCell>{team.createdAt.split("T")[0]}</TableCell>
                                                         <TableCell className="text-right cursor-pointer">
                                                             <Popover>
@@ -79,7 +78,7 @@ const GroupTable = () => {
                                                                     className="w-40 p-2 bg-white rounded-lg shadow-md border border-gray-200"
                                                                     side="bottom"
                                                                     align="end"
-                                                                >
+                                                                >  
                                                                     <div
                                                                         onClick={() => navigate(`/admin/hackteam/${team._id}`)}
                                                                         className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-gray-100 cursor-pointer transition"
@@ -118,4 +117,4 @@ const GroupTable = () => {
     )
 }
 
-export default GroupTable
+export default RolesTable

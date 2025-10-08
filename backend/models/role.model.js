@@ -30,7 +30,7 @@ const roleSchema=new mongoose.Schema({
         type:String,
         required:true
     },
-    hackTeam:{
+    hackTeamId:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'HackTeam',
         required:true

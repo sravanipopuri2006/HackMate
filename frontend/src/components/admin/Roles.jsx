@@ -2,20 +2,22 @@ import React, { useEffect, useState } from 'react'
 import Navbar from '../shared/Navbar'
 import { Input } from '../ui/input'
 import { Button } from '../ui/button'
-import GroupTable from './GroupTable'
-import { useNavigate } from 'react-router-dom'
-import useGetAllTeams from '@/hooks/useGetAllTeams'
-import { useDispatch } from 'react-redux'
-import { setSearchTeamByText } from '@/redux/teamSlice'
 
-const Group = () => {
-  useGetAllTeams();
+import { useNavigate } from 'react-router-dom'
+
+import { useDispatch } from 'react-redux'
+import { setSearchRoleByText } from '@/redux/roleSlice'
+import RolesTable from './RolesTable'
+import useGetAllAdminRoles from '@/hooks/useGetAllAdminRoles'
+
+const Roles = () => {
+  useGetAllAdminRoles();
   const[input,setInput]=useState("");
   const navigate = useNavigate();
   const dispatch=useDispatch();
 
   useEffect(()=>{
-    dispatch(setSearchTeamByText(input));
+    dispatch(setSearchRoleByText(input));
 
   },[input]);
 
@@ -26,13 +28,14 @@ const Group = () => {
         <div className = 'flex justify-between items-center my-5'>
            <Input
               className = "w-fit"
-              placeholder = "Filter by name" onChange={(e)=>setInput(e.target.value)}/>
-           <Button onClick={()=>navigate("/admin/hackteam/create")}>New Team</Button>
+              placeholder = "Filter by name,role" onChange={(e)=>setInput(e.target.value)}/>
+           <Button onClick={()=>navigate("/admin/role/post")}>📢 Announce Team</Button>
         </div>
-        <GroupTable/>
+        <RolesTable/>
       </div>
     </div>
   )
 }
 
-export default Group;
+export default Roles;
+

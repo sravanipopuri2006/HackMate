@@ -1,10 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { setSearchTeamByText } from "./teamSlice";
 
 const roleSlice = createSlice({
     name:'role',
     initialState:{
        allRoles:[],
        singleRole:null,
+
+       allAdminRoles:[],
+       searchRoleByText:"",
+
     },
     reducers:{
         //actions
@@ -13,9 +18,20 @@ const roleSlice = createSlice({
         },
         setSingleRole:(state,action)=>{
             state.singleRole=action.payload;
-        }
+        },
+        setAllAdminRoles:(state,action)=>{
+            state.allAdminRoles=action.payload;
+        },
+        
+            setSearchRoleByText:(state,action)=>{
+                state.searchRoleByText=action.payload;
+            }
+        
+
+
+
     }
 });
 
-export const { setAllRoles ,setSingleRole} = roleSlice.actions;
+export const { setAllRoles ,setSingleRole,setAllAdminRoles,setSearchRoleByText} = roleSlice.actions;
 export default roleSlice.reducer;

@@ -1,14 +1,20 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from '../shared/Navbar'
 import { Button } from '../ui/button'
-import { ArrowLeft } from 'lucide-react'
+import { ArrowLeft,Loader2 } from 'lucide-react'
 import { Label } from '../ui/label'
 import { Input } from '../ui/input'
 import { TEAM_API_END_POINT } from '@/utils/constant'
 import { useParams ,useNavigate} from 'react-router-dom'
 import { toast } from 'sonner'
+import { useSelector } from 'react-redux'
+import axios from 'axios'
+import useGetTeamById from '@/hooks/useGetTeamById'
+
 
 export default function GroupSetup() {
+  const params=useParams();
+  useGetTeamById(params.id);
   const [input, setInput] = useState({
     name: "",
     description: "",
@@ -17,6 +23,7 @@ export default function GroupSetup() {
     file: null
 
   });
+  const {singleTeam}=useSelector(store=>store.hackteam);
   const navigate=useNavigate();
   const[loading,setLoading]=useState(false);
   const changeEventHandler = (e) => {
@@ -26,8 +33,11 @@ export default function GroupSetup() {
     const file=e.target.files?.[0];
     setInput({...input,file});
   }
+   const { id } = useParams();
+
   const submitHandler=async(e)=>{
-    const params=useParams();
+  
+   
     e.preventDefault();
     const formData=new FormData();
     formData.append("name",input.name);
@@ -35,11 +45,11 @@ export default function GroupSetup() {
     formData.append("website",input.website);
     formData.append("hackathonlevel",input.hackathonlevel);
     if(input.file){
-      formData.append({...input,file});
+      formData.append("file",input.file);
     }
     try{
       setLoading(true);
-      const res=await axios.put(`${TEAM_API_END_POINT}/update/${params.id}`,formData,{
+      const res=await axios.put(`${TEAM_API_END_POINT}/update/${id}`,formData,{
         headers:{
           'Content-Type':'multipart/form-data'
         },
@@ -64,14 +74,14 @@ export default function GroupSetup() {
   }
   useEffect(()=>{
     setInput({
-      name: "",
-    description: "",
-    website: "",
-    hackathonlevel: "",
-    file: null
+    name: singleTeam.name||"",
+    description: singleTeam.description||"",
+    website: singleTeam.website||"",
+    hackathonlevel: singleTeam.hackathonlevel||"",
+    file: singleTeam.file||null
 
     })
-  })
+  },[singleTeam]);
 
   return (
     <div>
@@ -108,7 +118,7 @@ export default function GroupSetup() {
           </div>
            <div className='grid grid-cols-2 gap-4 mt-2' >
             <Label>Team Logo</Label>
-            <Input type="file" accept="image/*" onChange={changeFileHandler}></Input>
+            <Input type="file" accept="image/*" onChange={changeFileHandler} required></Input>
 
           </div>
            {
