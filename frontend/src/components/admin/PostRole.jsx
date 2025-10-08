@@ -27,14 +27,22 @@ export default function PostRole() {
 
     const changeEventHandler = (e) => {
         setInput({ ...input, [e.target.name]: e.target.value });
-
-
     };
+
+    const selectChangeHandler=(value)=>{
+        const selectedTeam=teams.find((team)=>team.name.toLowerCase()===value);
+        setInput({...input,hackTeamId:selectedTeam._id});
+    };
+
+    const submitHandler = (e) => {
+                e.preventDefault();
+                console.log(input);
+    }
     return (
         <div>
             <Navbar />
             <div className='flex items-center justify-center w-screen'>
-                <form className='p-8 max-w-4xl border border-gray-200 shadow-lg rounded-md'>
+                <form onSubmit = {submitHandler} className='p-8 max-w-4xl border border-gray-200 shadow-lg rounded-md'>
                 <div className='grid grid-cols-2 gap-2'>
                     <div>
                         <Label>Title</Label>
@@ -68,7 +76,7 @@ export default function PostRole() {
                         <Label className='mb-1'>Select Team</Label>
                     {
                         teams.length>=0 && (
-                                    <Select>
+                                    <Select onValueChange={selectChangeHandler}>
                                         <SelectTrigger className="w-[180px]">
                                             <SelectValue placeholder="Select The Team" />
                                         </SelectTrigger>
@@ -77,7 +85,7 @@ export default function PostRole() {
                                                 {
                                                     teams.map((team)=>{
                                                         return(
-                                                            <SelectItem key={team.id} value={team.name}>{team.name}</SelectItem>
+                                                            <SelectItem value={team?.name?.toLowerCase()}>{team.name}</SelectItem>
                                                         )
                                                     })
                                                 }
