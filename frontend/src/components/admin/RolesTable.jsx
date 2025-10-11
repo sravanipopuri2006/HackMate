@@ -3,7 +3,7 @@ import { TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow, T
 
 import { Avatar, AvatarImage } from '@radix-ui/react-avatar'
 import { Popover, PopoverContent, PopoverTrigger } from '@radix-ui/react-popover'
-import { MoreHorizontal, Edit2 } from 'lucide-react'
+import { MoreHorizontal, Edit2, Eye } from 'lucide-react'
 import { useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 
@@ -86,6 +86,13 @@ const RolesTable = () => {
                                                                         <Edit2 className="w-4 h-4 text-gray-600" />
                                                                         <span className="text-sm text-gray-700">Edit Team</span>
                                                                     </div>
+                                                                    <div onClick={()=>navigate(`/admin/role/${team._id}/applicants`)} className='flex items-center w-fit gap-2 cursor-pointer mt-2'>
+                                                                        <Eye className="w-4 h-4 text-gray-600"/>
+                                                                        <span>Applicants</span>
+
+
+                                                                    </div>
+
                                                                 </PopoverContent>
                                                             </Popover>
 

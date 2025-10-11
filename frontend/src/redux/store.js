@@ -2,6 +2,7 @@ import {combineReducers, configureStore} from '@reduxjs/toolkit';
 import authSlice from './authSlice';
 import roleSlice from './roleSlice';
 import teamSlice from './teamSlice';
+import applicationSlice from './applicationSlice';
 import {
   persistStore,
   persistReducer,
@@ -14,6 +15,7 @@ import {
 } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 
+
 const persistConfig = {
   key: 'root',
   version: 1,
@@ -22,7 +24,8 @@ const persistConfig = {
 const rootReducer = combineReducers({
     auth:authSlice,
     role:roleSlice,
-    hackteam:teamSlice
+    hackteam:teamSlice,
+    application:applicationSlice
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

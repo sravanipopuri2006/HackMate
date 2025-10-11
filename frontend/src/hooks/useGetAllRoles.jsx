@@ -10,6 +10,7 @@ const useGetAllRoles = () => {
         const fetchAllRoles = async () => {
             try {
                 const res = await axios.get(`${ROLE_API_END_POINT}/get`,{ withCredentials: true });
+                console.log("Response");
                 if (res.data.success){
                     dispatch(setAllRoles(res.data.roles));
                 }
@@ -21,4 +22,4 @@ const useGetAllRoles = () => {
     },[])
 }
 
-export default useGetAllRoles
+export default useGetAllRoles;

@@ -9,7 +9,7 @@ export const getAllRoles = async (req, res) => {
                 { description: { $regex: keyword, $options: "i" } },
             ]
             };
-            const roles = await Role.find(query).populate({path:'hackTeam'}).sort({createdAt:-1});
+            const roles = await Role.find(query).populate({path:'hackTeamId'}).sort({createdAt:-1});
             if (!roles)  {
                 return res.status(404).json({
                     message: "No roles found",
