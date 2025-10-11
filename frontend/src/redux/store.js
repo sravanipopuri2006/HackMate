@@ -23,7 +23,7 @@ const rootReducer = combineReducers({
     auth:authSlice,
     role:roleSlice,
     hackteam:teamSlice,
-   
+    application:applicationSlice
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
