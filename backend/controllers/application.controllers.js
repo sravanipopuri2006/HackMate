@@ -31,7 +31,7 @@ export const applyRole=async(req,res)=>{
             hackApplicant:userId
         });
         roleApply.applications.push(newApplication._id);
-         await newApplication.save();
+        
         await roleApply.save();
         return res.status(201).json({
             message:"Role applied successfully",
