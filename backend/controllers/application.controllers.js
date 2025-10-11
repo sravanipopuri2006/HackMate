@@ -31,7 +31,7 @@ export const applyRole=async(req,res)=>{
         });
         console.log(newApplication);
         roleApply.applications.push(newApplication._id);
-         await newApplication.save();
+      
         await roleApply.save();
        
         return res.status(201).json({
@@ -84,14 +84,12 @@ export const getAppliedRole=async(req,res)=>{
 }
 //Team lead to knowt the candidates applied
 export const getApplicants=async(req,res)=>{
-    try{
-        const roleId=req.params.id;
-        const role=await Role.findById(roleId).populate({
-            path:'applications',
-            options:{sort:{createdAt:-1}},
-            populate:{
-                path:'hackApplicant'
-            }
+    try {
+        const roleId = req.params.id;
+        const role = await Role.findById(roleId).populate({
+            path: 'applications',
+            populate: { path: 'hackApplicant' },
+            options: { sort: { createdAt: -1 } }
         });
         if(!role){
             return res.status(404).json({

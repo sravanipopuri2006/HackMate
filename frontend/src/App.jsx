@@ -15,6 +15,7 @@ import GroupCreate from './components/admin/GroupCreate'
 import GroupSetup from './components/admin/GroupSetup'
 import Roles from './components/admin/Roles'
 import PostRole from './components/admin/PostRole'
+import { Applicants } from './components/admin/Applicants'
 const appRouter=createBrowserRouter([{
   path:'/',
   element:<Home/>
@@ -55,7 +56,12 @@ const appRouter=createBrowserRouter([{
 },{
   path:"/admin/role/post",
   element:<PostRole/>
+},
+  {
+  path:"/admin/role/:id/applicants",
+  element:<Applicants/>
 }
+
 ])
 
 function App() {

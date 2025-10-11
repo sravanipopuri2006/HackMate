@@ -18,7 +18,7 @@ const TeamsDescription = ({role}) => {
     const isInitiallyApplied = user?._id
   ? singleRole?.applications?.some(app => 
       app.hackApplicant?.toString() === user._id ||  
-      app.hackApplicant?._id?.toString() === user._id 
+      app.hackApplicant?.id?.toString() === user._id 
     )
   : false;
     const [isApplied,setIsApplied] = useState(isInitiallyApplied);
@@ -32,7 +32,8 @@ const TeamsDescription = ({role}) => {
   const applyRoleHandler = async()=>
   {
     try{
-      const res = await axios.post(`${APPLICATION_API_END_POINT}/apply/${roleId}`,{withCredentials:true})
+      const res = await axios.post(`${APPLICATION_API_END_POINT}/apply/${roleId}`,{},{ withCredentials: true });
+
       console.log(res)      
       console.log(res.data)
       if(res.data.success)
