@@ -2,6 +2,7 @@ import {combineReducers, configureStore} from '@reduxjs/toolkit';
 import authSlice from './authSlice';
 import roleSlice from './roleSlice';
 import teamSlice from './teamSlice';
+import applicationSlice from './applicationSlice';
 import {
   persistStore,
   persistReducer,
@@ -13,6 +14,7 @@ import {
   REGISTER,
 } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
+
 
 const persistConfig = {
   key: 'root',
