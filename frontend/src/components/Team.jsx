@@ -29,12 +29,12 @@ export const Team = ({role}) => {
       <div className='flex items-center gap-3 my-3'>
         <Avatar className="w-12 h-12">
           <AvatarImage
-            src={role?.hackTeamId?.logo}
+            src='https://www.shutterstock.com/image-vector/circle-line-simple-design-logo-600nw-2174926871.jpg'
             className="object-cover"
           />
         </Avatar>
         <div>
-          <h1 className='font-medium text-lg'>{role?.hackTeamId?.name}</h1>
+          <h1 className='font-medium text-lg'>{role?.hackTeam?.name}</h1>
           <p className='text-sm text-gray-500'>Saveetha Engineering College</p>
         </div>
       </div>

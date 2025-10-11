@@ -30,11 +30,9 @@ export const applyRole=async(req,res)=>{
             role:roleId,
             hackApplicant:userId
         });
-        console.log(newApplication);
         roleApply.applications.push(newApplication._id);
-       
+         await newApplication.save();
         await roleApply.save();
-       
         return res.status(201).json({
             message:"Role applied successfully",
             success:true
@@ -58,7 +56,7 @@ export const getAppliedRole=async(req,res)=>{
             path:"role",
             options:{sort:{createdAt:-1}},
             populate:{
-                path:'hackTeamId',
+                path:'hackTeam',
                 options:{sort:{createdAt:-1}}
 
             }
@@ -88,7 +86,7 @@ export const getApplicants=async(req,res)=>{
     try{
         const roleId=req.params.id;
         const role=await Role.findById(roleId).populate({
-            path:'applications',
+            path:"applications",
             options:{sort:{createdAt:-1}},
             populate:{
                 path:'hackApplicant'

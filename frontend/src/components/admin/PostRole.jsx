@@ -8,9 +8,6 @@ import store from '@/redux/store';
 import { Select, SelectValue,SelectTrigger, SelectItem,SelectContent,SelectGroup } from '../ui/select';
 import { toast } from 'sonner';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { Loader2 } from 'lucide-react';
-import { ROLE_API_END_POINT} from '@/utils/constant';
 
 
 const roleArray=[];
@@ -28,8 +25,7 @@ export default function PostRole() {
         experienceLevel: "",
         hackTeamId: ""
     });
-    const[loading,setLoading]=useState(false);
-
+    const {loading, setLoading} = useState(false);
     const navigate = useNavigate();
     const {teams}=useSelector(store=>store.hackteam);
 
@@ -46,26 +42,21 @@ export default function PostRole() {
                 e.preventDefault();
                 try {
                     setLoading(true);
-                    const res = await axios.post(`${ROLE_API_END_POINT}/post`, input, {
+                    const res = await axios.post(`$(TEAM_API_END_POINT)/post`, input, {
                         headers: {
                             'Content-Type': 'application/json'
                     },
                 
                     withCredentials: true
                 });
-               
+
                 if (res.data.success) {
                     toast.success(res.data.message);
-                    navigate('/admin/role');
+                    navigate('admin/teams');
                 }
-
-
-                
-            }
-             catch (error) {
+            } catch (error) {
                 toast.error(error.response.data.message);
-            } 
-            finally {
+            } finally {
                 setLoading(false);
             }
     }
@@ -131,13 +122,13 @@ export default function PostRole() {
 
 
 
-                    </div>
-                    {
-                        loading ? <Button className='w-full my-4 cursor-pointer '><Loader2 className='mr2- h-4 w-4 animate-spin' />Please wait </Button> : <Button type="submit" className='w-full my-4 cursor-pointer'>Announce New Role</Button>
-                    }
-                    {
-                        roleArray.length == 0 && <p className='text-xs text-red-600 font-bold text-center my-3'>*Please Register the Team to Post the Role</p>
-                    }
+                </div>
+                {
+loading? <Button className='w-full my-4 cursor-pointer '><Loader2 className='mr2- h-4 w-4 animate-spin'/>Please wait </Button>: <Button type="submit" className='w-full my-4 cursor-pointer'>Announce New Role</Button>
+            }
+                {
+                    roleArray.length==0 && <p className='text-xs text-red-600 font-bold text-center my-3'>*Please Register the Team to Post the Role</p>
+                }
                 </form>
 
             </div>
