@@ -32,7 +32,7 @@ const TeamsDescription = ({role}) => {
   const applyRoleHandler = async()=>
   {
     try{
-      const res = await axios.get(`${APPLICATION_API_END_POINT}/apply/${roleId}`,{withCredentials:true})
+      const res = await axios.post(`${APPLICATION_API_END_POINT}/apply/${roleId}`,{withCredentials:true})
       console.log(res)      
       console.log(res.data)
       if(res.data.success)

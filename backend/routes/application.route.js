@@ -4,7 +4,7 @@ import {applyRole, getApplicants, getAppliedRole, updateStatus } from '../contro
 
 
 const router=express.Router();
-router.route("/apply/:id").get(isAuthenticated,applyRole);
+router.route("/apply/:id").post(isAuthenticated,applyRole);
 router.route("/get").get(isAuthenticated,getAppliedRole);
 router.route("/:id/applicants").get(isAuthenticated,getApplicants);
 router.route("/status/:id/update").post(isAuthenticated,updateStatus);

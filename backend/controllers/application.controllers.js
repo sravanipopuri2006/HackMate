@@ -11,6 +11,7 @@ export const applyRole=async(req,res)=>{
             });
         }
         const existingApplication=await Application.findOne({role:roleId,hackApplicant:userId});
+        console.log(existingApplication);
         if(existingApplication){
             return res.status(400).json({
                 message:"You have already applied for this role",
@@ -31,7 +32,7 @@ export const applyRole=async(req,res)=>{
         });
         console.log(newApplication);
         roleApply.applications.push(newApplication._id);
-         await newApplication.save();
+       
         await roleApply.save();
        
         return res.status(201).json({
