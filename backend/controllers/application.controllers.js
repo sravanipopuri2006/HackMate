@@ -56,7 +56,7 @@ export const getAppliedRole=async(req,res)=>{
             path:"role",
             options:{sort:{createdAt:-1}},
             populate:{
-                path:'hackTeam',
+                path:'hackTeamId',
                 options:{sort:{createdAt:-1}}
 
             }
