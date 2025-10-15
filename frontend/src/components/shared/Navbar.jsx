@@ -48,7 +48,7 @@ const Navbar = () => {
                     {
                         user && user.role == 'hackLead' ? (
                             <>
-                            <li><Link to='/admin/teams'>Teams</Link></li>
+                            <li><Link to='/admin/hackteam'>Teams</Link></li>
                             <li><Link to="/admin/role">Roles</Link></li>
                             </>
                         ) : (

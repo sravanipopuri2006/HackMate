@@ -1,5 +1,6 @@
 import {Application} from "../models/application.model.js";
 import { Role } from "../models/role.model.js";
+
 export const applyRole=async(req,res)=>{
     try{
         const userId=req.id;
@@ -82,32 +83,42 @@ export const getAppliedRole=async(req,res)=>{
         console.log(error);
     }
 }
-//Team lead to knowt the candidates applied
-export const getApplicants=async(req,res)=>{
-    try {
-        const roleId = req.params.id;
-        const role = await Role.findById(roleId).populate({
-            path: 'applications',
-            populate: { path: 'hackApplicant' },
-            options: { sort: { createdAt: -1 } }
-        });
-        if(!role){
-            return res.status(404).json({
-                message:'Role Not Found',
-                success:false
-            });
+
+export const getApplicants = async (req, res) => {
+  try {
+    const roleId = req.params.id;
+    const role = await Role.findById(roleId)
+      .populate({
+        path: "applications", // populate applications array
+        populate: {
+          path: "hackApplicant", // populate each applicant inside application
+          model: "User"
+         
         }
-        return res.status(200).json({
-            role,
-            success:true
-        });
+      })
+      .populate("hackTeamId"); // optional: also populate team info
+      console.log(role);
 
-    }
-    catch(error){
-        console.log(error);
+    if (!role) {
+      return res.status(404).json({
+        message: "Role Not Found",
+        success: false
+      });
     }
 
-}
+    return res.status(200).json({
+      role,
+      success: true
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message: "Server Error",
+      success: false
+    });
+  }
+};
+
 export const updateStatus =async(req,res)=>{
     try{
         const {status}=req.body;

@@ -9,6 +9,7 @@ const roleSlice = createSlice({
 
        allAdminRoles:[],
        searchRoleByText:"",
+       allAppliedRoles:[],
 
     },
     reducers:{
@@ -22,10 +23,13 @@ const roleSlice = createSlice({
         setAllAdminRoles:(state,action)=>{
             state.allAdminRoles=action.payload;
         },
-        
-            setSearchRoleByText:(state,action)=>{
-                state.searchRoleByText=action.payload;
-            }
+        setSearchRoleByText:(state,action)=>{
+            state.searchRoleByText=action.payload;
+        },
+        setAllAppliedRoles:(state,action)=>{
+            state.allAppliedRoles=action.payload;
+        }
+
         
 
 
@@ -33,5 +37,5 @@ const roleSlice = createSlice({
     }
 });
 
-export const { setAllRoles ,setSingleRole,setAllAdminRoles,setSearchRoleByText} = roleSlice.actions;
+export const { setAllRoles ,setSingleRole,setAllAdminRoles,setSearchRoleByText,setAllAppliedRoles} = roleSlice.actions;
 export default roleSlice.reducer;

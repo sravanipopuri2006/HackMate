@@ -9,12 +9,15 @@ import RegisteredTeamsTable from './RegisteredTeamsTable'
 import UpdateProfileDialog from './UpdateProfileDialog'
 import { useSelector } from 'react-redux'
 import store from '@/redux/store'
+import useGetAllAdminRoles from '@/hooks/useGetAllAdminRoles'
 
 const isResume = true
 
 const Profile = () => {
+  useGetAllAdminRoles();
   const [open, setOpen] = useState(false);
   const {user}=useSelector(store=>store.auth);
+
 
   return (
     <div>
