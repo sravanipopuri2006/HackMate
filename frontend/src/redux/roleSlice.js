@@ -29,13 +29,13 @@ const roleSlice = createSlice({
         setAllAppliedRoles:(state,action)=>{
             state.allAppliedRoles=action.payload;
         }
-
-        
-
-
-
     }
 });
 
-export const { setAllRoles ,setSingleRole,setAllAdminRoles,setSearchRoleByText,setAllAppliedRoles} = roleSlice.actions;
+export const {
+     setAllRoles,
+     setSingleRole,
+     setAllAdminRoles,
+     setSearchRoleByText,
+     setAllAppliedRoles} = roleSlice.actions;
 export default roleSlice.reducer;

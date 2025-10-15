@@ -20,12 +20,12 @@ const RegisteredTeamsTable = () => {
                 </TableHeader>
                 <TableBody>
                        {
-                        allAppliedRoles.length<0?<span>You haven't applied to any Teams yet.</span>:allAppliedRoles.map((item,index)=>(
-                            <TableRow key = {index}>
-                                <TableCell>01/01/2023</TableCell>
-                                <TableCell>Frontend Developer</TableCell>
-                                <TableCell>Google</TableCell>
-                                <TableCell className="text-right"><Badge>Selected</Badge></TableCell>
+                        allAppliedRoles.length<=0?<span>You haven't applied to any Teams yet.</span>:allAppliedRoles.map((appliedRole)=>(
+                            <TableRow key = {appliedRole._id}>
+                                <TableCell>{appliedRole?.createdAt}</TableCell>
+                                <TableCell>{appliedRole.role?.title}</TableCell>
+                                <TableCell>{appliedRole.role?.hackTeamId?.name}</TableCell>
+                                <TableCell className="text-right"><Badge>{appliedRole.status}</Badge></TableCell>
 
                             </TableRow>
                         ))
