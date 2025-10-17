@@ -1,12 +1,12 @@
-import { Table } from './ui/table'
 import React from 'react'
-import { TableBody, TableCaption, TableCell, TableHead ,TableHeader, TableRow} from './ui/table'
+import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from './ui/table'
 import { Badge } from './ui/badge'
 import { useSelector } from 'react-redux'
 
 const RegisteredTeamsTable = () => {
-    const {allAppliedRoles}=useSelector(store=>store.role);
-    return(
+    const { allAppliedRoles } = useSelector(store => store.role);
+
+    return (
         <div>
             <Table>
                 <TableCaption>A list of your registered teams</TableCaption>
@@ -16,23 +16,31 @@ const RegisteredTeamsTable = () => {
                         <TableHead>Role</TableHead>
                         <TableHead>Team Name</TableHead>
                         <TableHead className="text-right">Status</TableHead>
-                    </TableRow>    
+                    </TableRow>
                 </TableHeader>
                 <TableBody>
-                       {
-                        allAppliedRoles.length<=0?<span>You haven't applied to any Teams yet.</span>:allAppliedRoles.map((appliedRole)=>(
-                            <TableRow key = {appliedRole._id}>
-                                <TableCell>{appliedRole?.createdAt}</TableCell>
+                    {allAppliedRoles.length <= 0 ? (
+                        <TableRow>
+                            <TableCell colSpan={4} className="text-center py-4 text-gray-500">
+                                You haven't applied to any Teams yet.
+                            </TableCell>
+                        </TableRow>
+                    ) : (
+                        allAppliedRoles.map((appliedRole) => (
+                            <TableRow key={appliedRole._id}>
+                                <TableCell>{appliedRole?.createdAt.split("T")[0]}</TableCell>
                                 <TableCell>{appliedRole.role?.title}</TableCell>
                                 <TableCell>{appliedRole.role?.hackTeamId?.name}</TableCell>
-                                <TableCell className="text-right"><Badge>{appliedRole.status}</Badge></TableCell>
-
+                                <TableCell className="text-right">
+                                    <Badge className={`${appliedRole?.status=== "rejected" ? 'bg-red-400': appliedRole?.status==="pending"?"bg-gray-400":"bg-green-400"}`}>{appliedRole.status.toUpperCase()}</Badge>
+                                </TableCell>
                             </TableRow>
                         ))
-                       }
-                </TableBody>    
+                    )}
+                </TableBody>
             </Table>
         </div>
-    )
-}
-export default RegisteredTeamsTable
+    );
+};
+
+export default RegisteredTeamsTable;

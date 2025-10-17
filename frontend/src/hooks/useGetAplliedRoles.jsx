@@ -9,7 +9,7 @@ export const useGetAplliedRoles = () => {
     useEffect(()=>{
         const fetchAppliedRoles=async()=>{
             try{
-                const res=await axios.post(`${APPLICATION_API_END_POINT}/get`,{withCredentials:true});
+                const res=await axios.get(`${APPLICATION_API_END_POINT}/get`,{withCredentials:true});
                 console.log(res.data);
                 if(res.data.success){
                     dispatch(setAllAppliedRoles(res.data.application));
