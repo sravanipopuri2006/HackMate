@@ -10,6 +10,7 @@ const roleSlice = createSlice({
        allAdminRoles:[],
        searchRoleByText:"",
        allAppliedRoles:[],
+       searchedQuery:"", 
 
     },
     reducers:{
@@ -28,7 +29,11 @@ const roleSlice = createSlice({
         },
         setAllAppliedRoles:(state,action)=>{
             state.allAppliedRoles=action.payload;
+        },
+        setSearchedQuery:(state,action)=>{
+            state.searchedQuery=action.payload;
         }
+
     }
 });
 
@@ -37,5 +42,6 @@ export const {
      setSingleRole,
      setAllAdminRoles,
      setSearchRoleByText,
-     setAllAppliedRoles} = roleSlice.actions;
+     setAllAppliedRoles,
+     setSearchedQuery } = roleSlice.actions;
 export default roleSlice.reducer;

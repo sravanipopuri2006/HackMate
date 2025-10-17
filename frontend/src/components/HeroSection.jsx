@@ -1,8 +1,19 @@
-import React from "react";
+import React, { use, useState } from "react";
 import { Button } from "./ui/button";
 import { Search } from "lucide-react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { setSearchedQuery } from "@/redux/roleSlice";
 
 export default function HeroSection() {
+  const [query,setQuery] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const searchRoleHandler = () => {
+    dispatch(setSearchedQuery(query));
+    navigate("/browse");
+  }
   return (
     <section className="relative bg-gradient-to-b from-white via-purple-50 to-white py-20">
       <div className="max-w-4xl mx-auto text-center px-4">
@@ -31,9 +42,10 @@ export default function HeroSection() {
           <input
             type="text"
             placeholder="Find your hackathon crew"
+            onChange={(e) => setQuery(e.target.value)}
             className="flex-1 px-5 py-3 outline-none text-gray-700 placeholder-gray-400"
           />
-          <Button className="rounded-none rounded-r-full px-6 py-6 bg-gradient-to-r from-[#6A38C2] to-[#F83002] hover:opacity-90 transition-all">
+          <Button onClick={searchRoleHandler} className="rounded-none rounded-r-full px-6 py-6 bg-gradient-to-r from-[#6A38C2] to-[#F83002] hover:opacity-90 transition-all">
             <Search className="h-5 w-5 text-white" />
           </Button>
         </div>
