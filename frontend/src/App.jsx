@@ -16,6 +16,7 @@ import GroupSetup from './components/admin/GroupSetup'
 import Roles from './components/admin/Roles'
 import PostRole from './components/admin/PostRole'
 import { Applicants } from './components/admin/Applicants'
+import ProtectedRoute from './components/admin/ProtectedRoute'
 const appRouter=createBrowserRouter([{
   path:'/',
   element:<Home/>
@@ -42,7 +43,7 @@ const appRouter=createBrowserRouter([{
 },
 {
   path:"/admin/hackteam",
-  element:<Group/>
+  element:<ProtectedRoute><Group/></ProtectedRoute>
 },
 {
   path:"/admin/hackteam/create",

@@ -3,6 +3,7 @@ import Navbar from './shared/Navbar'
 import { FilterCard } from './FilterCard'
 import { Team } from './Team'
 import { useSelector } from 'react-redux';
+import { motion } from 'framer-motion';
 
 
 export default function Teams() {
@@ -46,10 +47,14 @@ export default function Teams() {
                 <div className='grid grid-cols-3 gap-4'>
                   {
                     filterRoles?.map((role) => (
-                      <div key={role._id}>
+                     <motion.div 
+                        initial = {{opacity:0, x:100}}
+                        animate = {{opacity:1, x:0}}
+                        exit = {{opacity:0, x:-100}}
+                        transition={{duration:0.3}}
+                        key={role?._id}>
                         <Team role={role}/>
-                      </div>
-
+                      </motion.div>
                     ))
 
                   }
