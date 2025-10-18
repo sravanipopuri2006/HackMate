@@ -3,9 +3,11 @@ import LatestRolesCard from './LatestRolesCard';
 import { useSelector } from 'react-redux';
 
 
+
 export default function LatestRoles() {
     const randomRoles=[1,2,3,4,5,6,7,8];
     const allRoles = useSelector((store) => store.role?.allRoles) || [];
+   
 
   return (
     <div className='max-w-7xl mx-auto my-20'>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from './shared/Navbar'
 import { FilterCard } from './FilterCard'
 import { Team } from './Team'
@@ -6,7 +6,32 @@ import { useSelector } from 'react-redux';
 
 
 export default function Teams() {
-  const {allRoles}=useSelector(store=>store.role);
+  const {allRoles,searchedQuery}=useSelector(store=>store.role);
+  const [filterRoles,setFilterRoles]=useState(allRoles);
+  useEffect(() => {
+  const query = searchedQuery?.trim().toLowerCase() || '';
+
+  if (query) {
+    const filteredRoles = allRoles.filter((role) => {
+      const title = role?.title?.toLowerCase() || '';
+      const description = role?.description?.toLowerCase() || '';
+      const hackathonType = role?.hackathonType?.toLowerCase() || '';
+      const experienceLevel = role?.experienceLevel?.toLowerCase() || ''; 
+
+      return (
+        title.includes(query) ||
+        description.includes(query) ||
+        hackathonType.includes(query) ||
+        experienceLevel.includes(query) 
+      );
+    });
+
+    setFilterRoles(filteredRoles);
+  } else {
+    setFilterRoles(allRoles);
+  }
+}, [allRoles, searchedQuery]);
+
   return (
     <div>
       <Navbar />
@@ -16,11 +41,11 @@ export default function Teams() {
           <FilterCard />
           </div>
           {
-            allRoles.length <= 0 ? <span>Teams Not Found</span> : (
+            filterRoles?.length <= 0 ? <span>Teams Not Found</span> : (
               <div className='flex-1 h-[80vh] overflow-y-auto pb-5'>
                 <div className='grid grid-cols-3 gap-4'>
                   {
-                    allRoles.map((role) => (
+                    filterRoles?.map((role) => (
                       <div key={role._id}>
                         <Team role={role}/>
                       </div>

@@ -1,11 +1,12 @@
 import { useEffect } from "react";  
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { TEAM_API_END_POINT } from "@/utils/constant";
 import { setTeams } from "@/redux/teamSlice";
 
 const  useGetAllTeams= () => {
     const dispatch = useDispatch();
+    const {searchedQuery}=useSelector(store=>store.role);
     useEffect(() => {
         const fetchTeams = async () => {
             try {
@@ -19,7 +20,7 @@ const  useGetAllTeams= () => {
             }
         }
         fetchTeams();
-    },[])
+    },[]);
 }
 
 export default useGetAllTeams;
