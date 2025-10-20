@@ -79,6 +79,7 @@ export const login = async (req, res) => {
             })
         };
         // check role is correct or not
+        console.log(role);
         if (user.role !== role) {
             return res.status(400).json({
                 message: "Account does not exist with current role.",

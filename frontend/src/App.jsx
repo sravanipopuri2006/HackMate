@@ -17,6 +17,9 @@ import Roles from './components/admin/Roles'
 import PostRole from './components/admin/PostRole'
 import { Applicants } from './components/admin/Applicants'
 import ProtectedRoute from './components/admin/ProtectedRoute'
+import  Hackathons  from './components/Hackathons'
+import UpdateHackathon from './components/UpdateHackathon'
+import CreateHackathon from './components/CreateHackathon'
 const appRouter=createBrowserRouter([{
   path:'/',
   element:<Home/>
@@ -61,6 +64,16 @@ const appRouter=createBrowserRouter([{
   {
   path:"/admin/role/:id/applicants",
   element:<Applicants/>
+},
+{
+  path:"/hackathons",
+  element:<Hackathons/>
+},{
+  path:"hackathons/edit/:id",
+  element:<UpdateHackathon/>
+},{
+  path:"/create",
+  element:<CreateHackathon/>
 }
 
 ])

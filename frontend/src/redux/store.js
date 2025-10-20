@@ -3,6 +3,7 @@ import authSlice from './authSlice';
 import roleSlice from './roleSlice';
 import teamSlice from './teamSlice';
 import applicationSlice from './applicationSlice';
+import hackathonSlice from './hackathonSlice';
 import {
   persistStore,
   persistReducer,
@@ -25,7 +26,8 @@ const rootReducer = combineReducers({
     auth:authSlice,
     role:roleSlice,
     hackteam:teamSlice,
-    application:applicationSlice
+    application:applicationSlice,
+    hackathon:hackathonSlice
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

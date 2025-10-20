@@ -95,6 +95,12 @@ useEffect(() => {
 
                 <Label htmlFor="r2">Hack Applicant</Label>
               </div>
+               <div className="flex items-center space-x-2">
+                <input type="radio" name='role' value='collegeAdmin' checked={input.role == 'collegeAdmin'} onChange={changeEventHandler} className='cursor-pointer' />
+
+                <Label htmlFor="r3">College Admin</Label>
+              </div>
+              
             </RadioGroup>
               
 

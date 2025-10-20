@@ -113,15 +113,21 @@ useEffect(() => {
                     
                     <Label htmlFor="r2">Hack Applicant</Label>
                 </div>
-                </RadioGroup>
-                <div>
-                    <Label className='my-2'>Profile</Label>
-                    <Input accept="image/*" type="file" onChange = {changeFileHandler} className="cursor-pointer"/>
+                <div className="flex items-center space-x-2">
+                    <input type="radio" name='role' value='collegeAdmin' checked={input.role=='collegeAdmin'} onChange = {changeEventHandler} className='cursor-pointer'/>
+                    
+                    <Label htmlFor="r3">College Admin</Label>
                 </div>
+                </RadioGroup>
+                
 
 
 
             </div>
+            <div>
+                    <Label className='my-2'>Profile</Label>
+                    <Input accept="image/*" type="file" onChange = {changeFileHandler} className="cursor-pointer"/>
+                </div>
              {
 loading? <Button className='w-full my-4 cursor-pointer '><Loader2 className='mr2- h-4 w-4 animate-spin'/>Please wait </Button>: <Button type="submit" className='w-full my-4 cursor-pointer'>Sign up</Button>
             }

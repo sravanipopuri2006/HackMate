@@ -49,13 +49,15 @@ const Navbar = () => {
                         user && user.role == 'hackLead' ? (
                             <>
                             <li><Link to='/admin/hackteam'>Teams</Link></li>
+                            <li><Link to="/hackathons">Hackathons</Link></li>
+
                             <li><Link to="/admin/role">Roles</Link></li>
                             </>
                         ) : (
                             <>
                             <li><Link to='/'>Home</Link></li>
                             <li><Link to='/teams'>Teams</Link></li>
-                            <li>Hackathons</li>
+                            <li><Link to="/hackathons">Hackathons</Link></li>
                             <li><Link to='/browse'>Browse</Link></li>
                             </>
                         )
