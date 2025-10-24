@@ -112,3 +112,12 @@ export const postRole = async (req, res) => {
         });
     }
 };
+export const deleteRole=async(req,res)=>{
+    try{
+        const roleId=req.params.id;
+        const role=await Role.findByIdAndDelete(roleId);
+    }
+    catch(error){
+        console.log(error);
+    }
+}

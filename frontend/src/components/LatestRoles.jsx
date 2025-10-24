@@ -1,25 +1,37 @@
-import React from 'react'
+import React from 'react';
 import LatestRolesCard from './LatestRolesCard';
 import { useSelector } from 'react-redux';
 
-
-
 export default function LatestRoles() {
-    const randomRoles=[1,2,3,4,5,6,7,8];
-    const allRoles = useSelector((store) => store.role?.allRoles) || [];
-   
+  const allRoles = useSelector((store) => store.role?.allRoles) || [];
 
   return (
-    <div className='max-w-7xl mx-auto my-20'>
-        <h1 className='text-4xl font-bold'><span className='text-[#6A38C2]'>Discover Fresh</span> Opportunities</h1>
-        <div className='grid grid-cols-3 gap-4 my-5'>
-            {
-              allRoles.length <= 0 ? <span>No Role Available</span> : allRoles?.slice(0,6).map((role) => <LatestRolesCard key = {role._id} role = {role}/>)
-            }
+    <div className="max-w-7xl mx-auto my-24 px-5">
+      {/* Section Heading */}
+      <h1 className="text-3xl md:text-4xl font-bold text-center">
+        <span className="bg-gradient-to-r from-[#2E6BFF] to-[#00A2FF] bg-clip-text text-transparent">
+          Discover Fresh
+        </span>{" "}
+        <span className="text-blue-900 drop-shadow-sm">Opportunities</span>
+      </h1>
 
-        </div>
-
-
+      {/* Roles Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7 my-12">
+        {allRoles.length <= 0 ? (
+          <div className="text-center text-blue-600 font-medium w-full">
+            No Roles Available at the moment!
+          </div>
+        ) : (
+          allRoles
+            ?.slice(0, 6)
+            .map((role) => (
+              <LatestRolesCard
+                key={role._id}
+                role={role}
+              />
+            ))
+        )}
+      </div>
     </div>
-  )
+  );
 }

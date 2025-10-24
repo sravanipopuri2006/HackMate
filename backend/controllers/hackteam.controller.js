@@ -110,4 +110,25 @@ export const updateProfile=async(req,res)=>{
     }
 
 }
+export const deleteTeam=async(req,res)=>{
+    try{
+        const teamId=req.params.id;
+        const team=await HackTeam.findByIdAndDelete(teamId);
+        if(!team){
+            return res.status(404).json({
+                message:"Team not found",
+                success:false
+            });
+        }
+        return res.status(200).json({
+            message:"Team deleted successfully",
+            success:true
+        });
+        
+
+    }
+    catch(error){
+        console.log(error);
+    }
+}
 
