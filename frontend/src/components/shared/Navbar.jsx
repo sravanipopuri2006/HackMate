@@ -17,9 +17,7 @@ const Navbar = () => {
 
   const logOutHandler = async () => {
     try {
-      const res = await axios.get(`${USER_API_END_POINT}/logout`, {
-        withCredentials: true
-      });
+      const res = await axios.get(`${USER_API_END_POINT}/logout`, { withCredentials: true });
       if (res.data.success) {
         dispatch(setUser(null));
         navigate("/");
@@ -32,33 +30,38 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 bg-gradient-to-r from-[#67B7FF] via-[#4A97FF] to-[#2E6BFF] shadow-lg">
+    <nav className="
+      fixed top-0 left-0 w-full z-50
+      bg-white/10 backdrop-blur-md
+      border-b border-white/30
+      shadow-sm
+    ">
       <div className="flex items-center justify-between mx-auto max-w-7xl h-16 px-6">
 
         {/* Brand */}
         <Link to="/" className="flex items-center space-x-2 select-none">
-          <div className="h-9 w-9 rounded-xl bg-white/20 flex items-center justify-center shadow-sm">
-            <span className="text-white font-bold">H</span>
+          <div className="h-9 w-9 rounded-xl bg-white/30 flex items-center justify-center shadow-sm">
+            <span className="text-[#0A58CA] font-extrabold">H</span>
           </div>
-          <span className="text-white text-lg font-semibold tracking-wide drop-shadow-sm">
+          <span className="text-lg font-semibold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-[#0A58CA] to-[#00A6FB]">
             HACKMATE
           </span>
         </Link>
 
         {/* Navigation Links */}
-        <ul className="hidden md:flex items-center gap-8 text-white font-medium">
+        <ul className="hidden md:flex items-center gap-8 font-medium text-blue-900">
           {user && user.role === 'hackLead' ? (
             <>
-              <li><Link to='/admin/hackteam' className="hover:text-white/80 transition">Teams</Link></li>
-              <li><Link to="/hackathons" className="hover:text-white/80 transition">Hackathons</Link></li>
-              <li><Link to="/admin/role" className="hover:text-white/80 transition">Roles</Link></li>
+              <li><Link to='/admin/hackteam' className="hover:text-[#0A58CA] transition">Teams</Link></li>
+              <li><Link to="/hackathons" className="hover:text-[#0A58CA] transition">Hackathons</Link></li>
+              <li><Link to="/admin/role" className="hover:text-[#0A58CA] transition">Roles</Link></li>
             </>
           ) : (
             <>
-              <li><Link to='/' className="hover:text-white/80 transition">Home</Link></li>
-              <li><Link to='/teams' className="hover:text-white/80 transition">Teams</Link></li>
-              <li><Link to="/hackathons" className="hover:text-white/80 transition">Hackathons</Link></li>
-              <li><Link to='/browse' className="hover:text-white/80 transition">Browse</Link></li>
+              <li><Link to='/' className="hover:text-[#0A58CA] transition">Home</Link></li>
+              <li><Link to='/teams' className="hover:text-[#0A58CA] transition">Teams</Link></li>
+              <li><Link to="/hackathons" className="hover:text-[#0A58CA] transition">Hackathons</Link></li>
+              <li><Link to='/browse' className="hover:text-[#0A58CA] transition">Browse</Link></li>
             </>
           )}
         </ul>
@@ -67,12 +70,12 @@ const Navbar = () => {
         {!user ? (
           <div className="flex items-center gap-3">
             <Link to="/login">
-              <Button className="bg-white text-blue-700 hover:bg-blue-50 shadow-sm font-semibold">
+              <Button className="bg-white text-blue-700 hover:bg-white/90 shadow-sm font-semibold">
                 Login
               </Button>
             </Link>
             <Link to="/signup">
-              <Button className="bg-white/20 text-white hover:bg-white/30 shadow-sm font-semibold backdrop-blur-md">
+              <Button className="bg-white/20 text-blue-900 hover:bg-white/30 shadow-sm font-semibold backdrop-blur-md">
                 Signup
               </Button>
             </Link>
@@ -80,7 +83,7 @@ const Navbar = () => {
         ) : (
           <Popover>
             <PopoverTrigger asChild>
-              <Avatar className="cursor-pointer ring-2 ring-white/60 hover:ring-white transition-all shadow-md">
+              <Avatar className="cursor-pointer ring-1 ring-white/60 hover:ring-white transition-all shadow-sm">
                 <AvatarImage src={user?.profile?.profilePhoto} alt="profile" />
                 <AvatarFallback className="font-semibold">
                   {user?.fullname?.charAt(0)?.toUpperCase() || "U"}
@@ -91,7 +94,7 @@ const Navbar = () => {
             <PopoverContent className="w-72 bg-white shadow-xl rounded-xl border border-gray-200 p-4">
               {/* Profile Top */}
               <div className="flex gap-4 border-b pb-3 mb-3">
-                <Avatar className="ring-1 ring-blue-400/50">
+                <Avatar className="ring-1 ring-blue-400/30">
                   <AvatarImage src={user?.profile?.profilePhoto} alt="profile" />
                   <AvatarFallback className="font-semibold">
                     {user?.fullname?.charAt(0)?.toUpperCase() || "U"}
@@ -107,7 +110,6 @@ const Navbar = () => {
 
               {/* Profile Menu Items */}
               <div className="flex flex-col gap-3 text-gray-700">
-
                 {user && user.role === 'hackApplicant' && (
                   <Link to="/profile" className="flex items-center gap-2 hover:text-gray-900 transition cursor-pointer">
                     <User2 className="w-4" />

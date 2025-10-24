@@ -17,14 +17,8 @@ export default function HeroSection() {
   };
 
   return (
-    <section className="relative min-h-[90vh] flex flex-col items-center justify-center bg-gradient-to-b from-[#E8F6FF] via-[#D5EEFF] to-[#F8FBFF] text-gray-900 overflow-hidden">
-      {/* Soft floating gradients */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_20%,rgba(92,171,255,0.25),transparent_70%)]"></div>
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_80%,rgba(0,180,255,0.15),transparent_70%)]"></div>
-
-      {/* Main content */}
+    <section className="relative min-h-[90vh] flex flex-col items-center justify-center bg-transparent text-gray-900 overflow-hidden">
       <div className="relative z-10 text-center px-6">
-        {/* Tagline */}
         <motion.span
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -34,7 +28,6 @@ export default function HeroSection() {
           🚀 One platform. Endless hackathon opportunities.
         </motion.span>
 
-        {/* Heading */}
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -47,7 +40,6 @@ export default function HeroSection() {
           </span>
         </motion.h1>
 
-        {/* Subtext */}
         <motion.p
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
@@ -58,12 +50,13 @@ export default function HeroSection() {
           collaborate effortlessly, and make your next hackathon project a win.
         </motion.p>
 
-        {/* Search Bar */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.4 }}
-          className="mt-12 flex items-center w-full md:w-[70%] lg:w-[50%] mx-auto bg-white/70 border border-[#A0D8FF]/50 rounded-full shadow-md backdrop-blur-lg overflow-hidden transition-all hover:shadow-lg hover:bg-white/80"
+          className="mt-12 flex items-center w-full md:w-[70%] lg:w-[50%] mx-auto 
+                     bg-white/70 border border-[#A0D8FF]/50 rounded-full shadow-md 
+                     backdrop-blur-lg overflow-hidden hover:shadow-lg hover:bg-white/80"
         >
           <input
             type="text"
