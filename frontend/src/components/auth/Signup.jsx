@@ -133,7 +133,7 @@ export const Signup = () => {
 
       {/* === Center Layout (More Top Gap + Larger Image) === */}
       <main className="relative z-10 mx-auto max-w-7xl px-4">
-        <div className="grid min-h-[calc(100vh-130px)] place-items-center gap-10 md:gap-12 lg:grid-cols-2 lg:gap-16 py-16 lg:py-20">
+        <div className="grid min-h-[calc(100vh-130px)] place-items-center gap-10 md:gap-12 lg:grid-cols-2 lg:gap-16 py-17 lg:py-20">
 
           {/* LEFT: Signup Box */}
           <motion.form

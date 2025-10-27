@@ -62,7 +62,7 @@ export default function HeroSection() {
             type="text"
             placeholder="Find your hackathon crew"
             onChange={(e) => setQuery(e.target.value)}
-            className="flex-1 px-5 py-4 outline-none bg-transparent text-gray-700 placeholder-gray-500"
+            className="flex-1 px-6 py-3 outline-none bg-transparent text-gray-700 placeholder-gray-500"
           />
           <Button
             onClick={searchRoleHandler}

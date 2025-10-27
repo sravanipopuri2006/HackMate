@@ -30,25 +30,30 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="
-      fixed top-0 left-0 w-full z-50
-      bg-white/10 backdrop-blur-md
-      border-b border-white/30
-      shadow-sm
-    ">
+    <nav
+      className="
+        fixed top-0 left-0 w-full z-50
+        bg-white/10 backdrop-blur-md
+        border-b border-white/30
+        shadow-sm
+      "
+    >
       <div className="flex items-center justify-between mx-auto max-w-7xl h-16 px-6">
 
-        {/* Brand */}
+        {/* ---------- Brand Section ---------- */}
         <Link to="/" className="flex items-center space-x-2 select-none">
-          <div className="h-9 w-9 rounded-xl bg-white/30 flex items-center justify-center shadow-sm">
-            <span className="text-[#0A58CA] font-extrabold">H</span>
+          {/* Empty logo box — so you can place your custom logo image */}
+          <div className="h-10 w-10 flex items-center justify-center rounded-xl overflow-hidden bg-transparent">
+            {/* Add your <img src="yourLogo.png" alt="Hackmate logo" className="h-full w-full object-contain" /> later */}
           </div>
-          <span className="text-lg font-semibold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-[#0A58CA] to-[#00A6FB]">
+
+          {/* Brand Name */}
+          <span className="text-xl font-extrabold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-[#0A58CA] to-[#00A6FB] drop-shadow-sm">
             HACKMATE
           </span>
         </Link>
 
-        {/* Navigation Links */}
+        {/* ---------- Navigation Links ---------- */}
         <ul className="hidden md:flex items-center gap-8 font-medium text-blue-900">
           {user && user.role === 'hackLead' ? (
             <>
@@ -66,16 +71,31 @@ const Navbar = () => {
           )}
         </ul>
 
-        {/* Right Auth / Profile Section */}
+        {/* ---------- Right Auth/Profile Section ---------- */}
         {!user ? (
           <div className="flex items-center gap-3">
+            {/* Updated Login Button */}
             <Link to="/login">
-              <Button className="bg-white text-blue-700 hover:bg-white/90 shadow-sm font-semibold">
+              <Button
+                className="
+                  bg-gradient-to-r from-[#1570EF] to-[#54A7FF]
+                  text-white hover:opacity-90
+                  shadow-md font-semibold
+                  transition-all duration-200
+                "
+              >
                 Login
               </Button>
             </Link>
+
+            {/* Signup button (kept minimal) */}
             <Link to="/signup">
-              <Button className="bg-white/20 text-blue-900 hover:bg-white/30 shadow-sm font-semibold backdrop-blur-md">
+              <Button
+                className="
+                  bg-white/20 text-blue-900 hover:bg-white/30
+                  shadow-sm font-semibold backdrop-blur-md
+                "
+              >
                 Signup
               </Button>
             </Link>
@@ -111,7 +131,10 @@ const Navbar = () => {
               {/* Profile Menu Items */}
               <div className="flex flex-col gap-3 text-gray-700">
                 {user && user.role === 'hackApplicant' && (
-                  <Link to="/profile" className="flex items-center gap-2 hover:text-gray-900 transition cursor-pointer">
+                  <Link
+                    to="/profile"
+                    className="flex items-center gap-2 hover:text-gray-900 transition cursor-pointer"
+                  >
                     <User2 className="w-4" />
                     <span>View Profile</span>
                   </Link>

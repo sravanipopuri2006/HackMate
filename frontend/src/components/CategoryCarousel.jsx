@@ -32,8 +32,8 @@ const CategoryCarousel = () => {
   };
 
   return (
-    <div className="w-full max-w-3xl mx-auto relative bg-transparent">
-      <Carousel className="relative px-10">
+    <div className="w-full max-w-2xl mx-auto relative bg-transparent">
+      <Carousel className="relative px-15">
         <CarouselContent className="flex items-center">
           {category.map((cat, index) => (
             <CarouselItem
@@ -48,8 +48,8 @@ const CategoryCarousel = () => {
           ))}
         </CarouselContent>
 
-        <CarouselPrevious className="absolute -left-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 flex items-center justify-center bg-white/70 hover:bg-white text-blue-700 border border-blue-200 shadow-sm rounded-full cursor-pointer transition duration-300"/>
-        <CarouselNext className="absolute -right-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 flex items-center justify-center bg-white/70 hover:bg-white text-blue-700 border border-blue-200 shadow-sm rounded-full cursor-pointer transition duration-300"/>
+        <CarouselPrevious className="absolute -left-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center bg-white/70 hover:bg-white text-blue-700 border border-blue-200 shadow-sm rounded-full cursor-pointer transition duration-300"/>
+        <CarouselNext className="absolute -right-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center bg-white/70 hover:bg-white text-blue-700 border border-blue-200 shadow-sm rounded-full cursor-pointer transition duration-300"/>
       </Carousel>
     </div>
   );
