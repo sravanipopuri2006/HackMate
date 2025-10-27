@@ -184,27 +184,34 @@ export const Signup = () => {
             <div className="my-3">
               <Label className="text-[#0B2C5E] text-[13px]">Role</Label>
               <div className="mt-2 grid grid-cols-3 gap-1.5 rounded-xl bg-white/60 p-1 shadow-inner">
-                {['Hack Lead', 'Hack Applicant', 'College Admin'].map((r) => {
-                  const value = r.replace(' ', '').toLowerCase()
-                  const active = input.role === value
-                  return (
-                    <motion.button
-                      key={r}
-                      type="button"
-                      whileHover={{ y: -1 }}
-                      whileTap={{ scale: 0.98 }}
-                      onClick={() => setInput(prev => ({ ...prev, role: value }))}
-                      className={[
-                        'rounded-lg px-3 py-1.5 text-[13px] font-medium transition-all',
-                        active
-                          ? 'bg-gradient-to-r from-[#1570EF] to-[#54A7FF] text-white shadow-sm'
-                          : 'text-[#0B2C5E] hover:bg-blue-50/80'
-                      ].join(' ')}
-                    >
-                      {r}
-                    </motion.button>
-                  )
-                })}
+            {['Hack Lead', 'Hack Applicant', 'College Admin'].map((r) => {
+  // Correct enum mapping
+  const mapping = {
+    'Hack Lead': 'hackLead',
+    'Hack Applicant': 'hackApplicant',
+    'College Admin': 'collegeAdmin'
+  };
+  const value = mapping[r];
+  const active = input.role === value;
+  return (
+    <motion.button
+      key={r}
+      type="button"
+      whileHover={{ y: -1 }}
+      whileTap={{ scale: 0.98 }}
+      onClick={() => setInput(prev => ({ ...prev, role: value }))}
+      className={[
+        'rounded-lg px-3 py-1.5 text-[13px] font-medium transition-all',
+        active
+          ? 'bg-gradient-to-r from-[#1570EF] to-[#54A7FF] text-white shadow-sm'
+          : 'text-[#0B2C5E] hover:bg-blue-50/80'
+      ].join(' ')}
+    >
+      {r}
+    </motion.button>
+  );
+})}
+
               </div>
             </div>
 
