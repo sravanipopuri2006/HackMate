@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from './shared/Navbar';
 import { FilterCard } from './FilterCard';
-import { Team } from './Team';
+import  Team  from './Team';
 import { useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
 
