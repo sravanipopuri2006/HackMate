@@ -19,30 +19,34 @@ export default function Home() {
 
   return (
     <div
-      className="min-h-screen flex flex-col text-blue-900 font-inter 
+      className="min-h-screen flex flex-col text-blue-900 font-inter
                  bg-[linear-gradient(180deg,#E8F5FF_0%,#D5EBFF_40%,#C7E3FF_70%,#BFE0FF_100%)]"
     >
-      {/* Navbar */}
-      <header className="bg-transparent backdrop-blur-sm">
-        <Navbar />
-      </header>
+      {/* Fixed navbar (glass look kept) */}
+      <Navbar />
 
-      {/* Hero Section */}
-      <section className="pt-10 bg-transparent">
-        <HeroSection />
-      </section>
+      {/* Spacer to offset the fixed navbar height (64–72px) */}
+      <div className="h-16 md:h-[72px]" />
 
-      {/* Category Carousel */}
-      <section className="bg-transparent">
-        <CategoryCarousel />
-      </section>
+      {/* Page content */}
+      <main className="flex-1">
+        {/* Hero Section */}
+        <section className="bg-transparent">
+          <HeroSection />
+        </section>
 
-      {/* Latest Roles Section */}
-      <section className="bg-transparent">
-        <div className="max-w-6xl mx-auto">
-          <LatestRoles />
-        </div>
-      </section>
+        {/* Category Carousel */}
+        <section className="bg-transparent">
+          <CategoryCarousel />
+        </section>
+
+        {/* Latest Roles Section */}
+        <section className="bg-transparent">
+          <div className="max-w-6xl mx-auto">
+            <LatestRoles />
+          </div>
+        </section>
+      </main>
 
       {/* Footer */}
       <footer className="mt-auto bg-transparent text-blue-900">

@@ -40,20 +40,24 @@ const Navbar = () => {
     >
       <div className="flex items-center justify-between mx-auto max-w-7xl h-16 px-6">
 
-        {/* ---------- Brand Section ---------- */}
-        <Link to="/" className="flex items-center space-x-2 select-none">
-          {/* Empty logo box — so you can place your custom logo image */}
-          <div className="h-10 w-10 flex items-center justify-center rounded-xl overflow-hidden bg-transparent">
-            {/* Add your <img src="yourLogo.png" alt="Hackmate logo" className="h-full w-full object-contain" /> later */}
-          </div>
+        {/* Brand (Logo Section) */}
+<Link to="/" className="flex items-center space-x-3 select-none">
+  <div className="relative h-20 w-20 flex items-center justify-center">
+    {/* Floating logo with soft shadow */}
+    <img
+      src="/LOGO.png" // Replace this with your uploaded image path
+      alt="Hackmate Logo"
+      className="h-200 w-200 object-contain drop-shadow-[0_0_6px_rgba(0,0,0,0.2)]"
+    />
+  </div>
 
-          {/* Brand Name */}
-          <span className="text-xl font-extrabold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-[#0A58CA] to-[#00A6FB] drop-shadow-sm">
-            HACKMATE
-          </span>
-        </Link>
+  <span className="text-xl font-extrabold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-[#0A58CA] to-[#00A6FB] drop-shadow-sm">
+    HACKMATE
+  </span>
+</Link>
 
-        {/* ---------- Navigation Links ---------- */}
+
+        {/* Nav links */}
         <ul className="hidden md:flex items-center gap-8 font-medium text-blue-900">
           {user && user.role === 'hackLead' ? (
             <>
@@ -71,10 +75,9 @@ const Navbar = () => {
           )}
         </ul>
 
-        {/* ---------- Right Auth/Profile Section ---------- */}
+        {/* Right side */}
         {!user ? (
           <div className="flex items-center gap-3">
-            {/* Updated Login Button */}
             <Link to="/login">
               <Button
                 className="
@@ -87,15 +90,8 @@ const Navbar = () => {
                 Login
               </Button>
             </Link>
-
-            {/* Signup button (kept minimal) */}
             <Link to="/signup">
-              <Button
-                className="
-                  bg-white/20 text-blue-900 hover:bg-white/30
-                  shadow-sm font-semibold backdrop-blur-md
-                "
-              >
+              <Button className="bg-white/20 text-blue-900 hover:bg-white/30 shadow-sm font-semibold backdrop-blur-md">
                 Signup
               </Button>
             </Link>
@@ -112,7 +108,6 @@ const Navbar = () => {
             </PopoverTrigger>
 
             <PopoverContent className="w-72 bg-white shadow-xl rounded-xl border border-gray-200 p-4">
-              {/* Profile Top */}
               <div className="flex gap-4 border-b pb-3 mb-3">
                 <Avatar className="ring-1 ring-blue-400/30">
                   <AvatarImage src={user?.profile?.profilePhoto} alt="profile" />
@@ -122,24 +117,17 @@ const Navbar = () => {
                 </Avatar>
                 <div>
                   <h4 className="font-semibold text-gray-800">{user?.fullname}</h4>
-                  <p className="text-sm text-gray-500">
-                    {user?.profile?.bio || "No bio available"}
-                  </p>
+                  <p className="text-sm text-gray-500">{user?.profile?.bio || "No bio available"}</p>
                 </div>
               </div>
 
-              {/* Profile Menu Items */}
               <div className="flex flex-col gap-3 text-gray-700">
                 {user && user.role === 'hackApplicant' && (
-                  <Link
-                    to="/profile"
-                    className="flex items-center gap-2 hover:text-gray-900 transition cursor-pointer"
-                  >
+                  <Link to="/profile" className="flex items-center gap-2 hover:text-gray-900 transition cursor-pointer">
                     <User2 className="w-4" />
                     <span>View Profile</span>
                   </Link>
                 )}
-
                 <button
                   onClick={logOutHandler}
                   className="flex items-center gap-2 hover:text-red-600 transition cursor-pointer"

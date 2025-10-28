@@ -1,77 +1,82 @@
-import React, { useEffect, useState } from 'react'
-import Navbar from './shared/Navbar'
-import { FilterCard } from './FilterCard'
-import { Team } from './Team'
+import React, { useEffect, useState } from 'react';
+import Navbar from './shared/Navbar';
+import { FilterCard } from './FilterCard';
+import { Team } from './Team';
 import { useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
 
-
 export default function Teams() {
-  const {allRoles,searchedQuery}=useSelector(store=>store.role);
-  const [filterRoles,setFilterRoles]=useState(allRoles);
+  const { allRoles, searchedQuery } = useSelector((store) => store.role);
+  const [filterRoles, setFilterRoles] = useState(allRoles);
+
   useEffect(() => {
-  const query = searchedQuery?.trim().toLowerCase() || '';
-
-  if (query) {
-    const filteredRoles = allRoles.filter((role) => {
-      const title = role?.title?.toLowerCase() || '';
-      const description = role?.description?.toLowerCase() || '';
-      const hackathonType = role?.hackathonType?.toLowerCase() || '';
-      const experienceLevel = role?.experienceLevel?.toLowerCase() || ''; 
-
-      return (
-        title.includes(query) ||
-        description.includes(query) ||
-        hackathonType.includes(query) ||
-        experienceLevel.includes(query) 
-      );
-    });
-
-    setFilterRoles(filteredRoles);
-  } else {
-    setFilterRoles(allRoles);
-  }
-}, [allRoles, searchedQuery]);
+    const query = searchedQuery?.trim().toLowerCase() || '';
+    if (query) {
+      const filtered = allRoles.filter((role) => {
+        const title = role?.title?.toLowerCase() || '';
+        const description = role?.description?.toLowerCase() || '';
+        const hackathonType = role?.hackathonType?.toLowerCase() || '';
+        const experienceLevel = role?.experienceLevel?.toLowerCase() || '';
+        return (
+          title.includes(query) ||
+          description.includes(query) ||
+          hackathonType.includes(query) ||
+          experienceLevel.includes(query)
+        );
+      });
+      setFilterRoles(filtered);
+    } else {
+      setFilterRoles(allRoles);
+    }
+  }, [allRoles, searchedQuery]);
 
   return (
-    <div>
+    <div className="min-h-screen bg-[linear-gradient(180deg,#eef6ff_0%,#eaf3ff_15%,#d9ecff_40%,#cde6ff_60%,#bfe0ff_80%,#b7ddff_100%)]">
       <Navbar />
-      <div className='max-w-7xl mx-auto mt-5'>
-        <div className='flex gap-5'>
-          <div className='w-20%'>
-          <FilterCard />
-          </div>
-          {
-            filterRoles?.length <= 0 ? <span>Teams Not Found</span> : (
-              <div className='flex-1 h-[80vh] overflow-y-auto pb-5'>
-                <div className='grid grid-cols-3 gap-4'>
-                  {
-                    filterRoles?.map((role) => (
-                     <motion.div 
-                        initial = {{opacity:0, x:100}}
-                        animate = {{opacity:1, x:0}}
-                        exit = {{opacity:0, x:-100}}
-                        transition={{duration:0.3}}
-                        key={role?._id}>
-                        <Team role={role}/>
-                      </motion.div>
-                    ))
 
-                  }
+      {/* Push content below fixed navbar */}
+      <main className="max-w-7xl mx-auto px-6 pt-24 pb-20">
+        <div className="flex flex-col lg:flex-row gap-10">
 
-                </div>
+          {/* Left: Filter Card (30%) */}
+          <aside className="lg:basis-[30%] lg:max-w-[30%]">
+            <div className="lg:sticky lg:top-24">
+              <FilterCard />
+            </div>
+          </aside>
 
-
-
+          {/* Right: Team Cards (70%) */}
+          <section className="lg:basis-[70%] lg:max-w-[70%]">
+            {filterRoles?.length <= 0 ? (
+              <div className="text-[#0B2C5E] font-semibold bg-white/40 backdrop-blur rounded-xl border border-white/50 p-6 shadow-sm">
+                Teams Not Found
               </div>
-
-            )
-
-
-          }
+            ) : (
+              <div
+                className="
+                  grid gap-8
+                  sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-2
+                  auto-rows-[minmax(420px,auto)]
+                "
+              >
+                {filterRoles.map((role) => (
+                  <motion.div
+                    key={role?._id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.25 }}
+                    className="h-full"
+                  >
+                    <div className="h-full">
+                      <Team role={role} />
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            )}
+          </section>
         </div>
-      </div>
-
+      </main>
     </div>
-  )
+  );
 }

@@ -185,8 +185,14 @@ export const Signup = () => {
               <Label className="text-[#0B2C5E] text-[13px]">Role</Label>
               <div className="mt-2 grid grid-cols-3 gap-1.5 rounded-xl bg-white/60 p-1 shadow-inner">
                 {['Hack Lead', 'Hack Applicant', 'College Admin'].map((r) => {
-                  const value = r.replace(' ', '').toLowerCase()
-                  const active = input.role === value
+                  // Correct enum mapping
+                  const mapping = {
+                    'Hack Lead': 'hackLead',
+                    'Hack Applicant': 'hackApplicant',
+                    'College Admin': 'collegeAdmin'
+                  };
+                  const value = mapping[r];
+                  const active = input.role === value;
                   return (
                     <motion.button
                       key={r}
@@ -203,7 +209,7 @@ export const Signup = () => {
                     >
                       {r}
                     </motion.button>
-                  )
+                  );
                 })}
               </div>
             </div>
