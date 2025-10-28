@@ -47,7 +47,7 @@ const Navbar = () => {
     <img
       src="/LOGO.png" // Replace this with your uploaded image path
       alt="Hackmate Logo"
-      className="h-200 w-200 object-contain drop-shadow-[0_0_6px_rgba(0,0,0,0.2)]"
+      className="h-200 w-200 object-contain drop-shadow-[0_0_6px_rgba(0,0,0,0)]"
     />
   </div>
 
