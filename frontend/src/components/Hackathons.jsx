@@ -73,12 +73,7 @@ export default function Hackathons() {
             {hackathons.map((hack) => (
               <div
                 key={hack._id}
-                className="
-                  rounded-2xl border border-white/40 bg-white/40 backdrop-blur-xl
-                  shadow-[0_12px_36px_rgba(15,70,140,0.10)] p-0
-                  hover:shadow-[0_16px_44px_rgba(15,70,140,0.16)]
-                  transition-shadow
-                "
+                className="mt- 30 transition-shadow"
               >
                 {/* Let your existing card render inside the glass panel */}
                 <HackathonCard hackathon={hack} />

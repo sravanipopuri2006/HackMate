@@ -39,7 +39,7 @@ export const FilterCard = () => {
     <div
       className="
         w-full rounded-2xl border border-white/20
-        bg-gradient-to-br from-[#1570EF]/95 via-[#1B7FFF]/90 to-[#54A7FF]/90
+        bg-gradient-to-br from-[#1570EF]/95 via-[#54A7FF]/90 to-[#1B7FFF]/90
         p-6 shadow-[0_8px_32px_rgba(10,70,160,0.25)]
         backdrop-blur-xl
         text-white

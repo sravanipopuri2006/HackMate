@@ -8,7 +8,7 @@ import useGetAllTeams from '@/hooks/useGetAllTeams'; // (kept if you need it els
 
 export default function Browse() {
   useGetAllRoles();
-  useGetAllTeams?.(); // safe if your hook exists; remove if unused
+  useGetAllTeams(); // safe if your hook exists; remove if unused
 
   const { allRoles } = useSelector((store) => store.role);
   const dispatch = useDispatch();
@@ -68,13 +68,7 @@ export default function Browse() {
             {allRoles.map((role) => (
               <div
                 key={role._id}
-                className="
-          rounded-2xl border border-white/40 bg-white/40 backdrop-blur-xl
-          shadow-[0_12px_36px_rgba(15,70,140,0.10)]
-          hover:shadow-[0_16px_44px_rgba(15,70,140,0.16)]
-          transition-shadow flex flex-col justify-between
-          min-h-[380px] h-full
-        "
+                className="h-full"
               >
                 <Team role={role} />
               </div>

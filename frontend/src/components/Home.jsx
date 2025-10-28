@@ -26,30 +26,30 @@ export default function Home() {
       <Navbar />
 
       {/* Spacer to offset the fixed navbar height (64–72px) */}
-      <div className="h-16 md:h-[72px]" />
+      <div className="h-16 md:h-[7px]" />
 
       {/* Page content */}
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="bg-transparent">
+        <section className="bg-transparent -mt-6">
           <HeroSection />
         </section>
 
         {/* Category Carousel */}
-        <section className="bg-transparent">
+        <section className="bg-transparent -mt-15">
           <CategoryCarousel />
         </section>
 
         {/* Latest Roles Section */}
-        <section className="bg-transparent">
-          <div className="max-w-6xl mx-auto">
+        <section className="bg-transparent -mt-8">
+          <div className="max-w-8xl mx-auto">
             <LatestRoles />
           </div>
         </section>
       </main>
 
       {/* Footer */}
-      <footer className="mt-auto bg-transparent text-blue-900">
+      <footer className="mt-auto bg-gradient-to-br from-[#1570EF]/95 via-[#1B3FFF]/90 to-[#54A7FF]/90 text-white-900">
         <Footer />
       </footer>
     </div>

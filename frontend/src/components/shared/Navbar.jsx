@@ -41,20 +41,20 @@ const Navbar = () => {
       <div className="flex items-center justify-between mx-auto max-w-7xl h-16 px-6">
 
         {/* Brand (Logo Section) */}
-<Link to="/" className="flex items-center space-x-3 select-none">
-  <div className="relative h-20 w-20 flex items-center justify-center">
-    {/* Floating logo with soft shadow */}
-    <img
-      src="/LOGO.png" // Replace this with your uploaded image path
-      alt="Hackmate Logo"
-      className="h-200 w-200 object-contain drop-shadow-[0_0_6px_rgba(0,0,0,0)]"
-    />
-  </div>
+        <Link to="/" className="flex items-center space-x-3 select-none">
+          <div className="relative h-20 w-20 flex items-center justify-center">
+            {/* Floating logo with soft shadow */}
+            <img
+              src="/LOGO.png" // Replace this with your uploaded image path
+              alt="Hackmate Logo"
+              className="h-20 w-20 object-contain drop-shadow-[0_0_6px_rgba(0,0,0,0)]"
+            />
+          </div>
 
-  <span className="text-xl font-extrabold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-[#0A58CA] to-[#00A6FB] drop-shadow-sm">
-    HACKMATE
-  </span>
-</Link>
+          <span className="text-xl font-extrabold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-[#0A58CA] to-[#00A6FB] drop-shadow-sm">
+            HACKMATE
+          </span>
+        </Link>
 
 
         {/* Nav links */}
@@ -81,11 +81,11 @@ const Navbar = () => {
             <Link to="/login">
               <Button
                 className="
-                  bg-gradient-to-r from-[#1570EF] to-[#54A7FF]
-                  text-white hover:opacity-90
-                  shadow-md font-semibold
-                  transition-all duration-200
-                "
+          bg-gradient-to-r from-[#1570EF] to-[#54A7FF]
+          text-white hover:opacity-90
+          shadow-md font-semibold
+          transition-all duration-200
+        "
               >
                 Login
               </Button>
@@ -97,48 +97,57 @@ const Navbar = () => {
             </Link>
           </div>
         ) : (
-          <Popover>
-            <PopoverTrigger asChild>
-              <Avatar className="cursor-pointer ring-1 ring-white/60 hover:ring-white transition-all shadow-sm">
-                <AvatarImage src={user?.profile?.profilePhoto} alt="profile" />
-                <AvatarFallback className="font-semibold">
-                  {user?.fullname?.charAt(0)?.toUpperCase() || "U"}
-                </AvatarFallback>
-              </Avatar>
-            </PopoverTrigger>
+          <div className="flex items-center gap-3">
+            {/* Display user's name */}
+            <span className="hidden md:inline-block text-blue-900 font-semibold">
+              Hi,&nbsp;{user?.fullname?.split(' ')[0] || 'User'}
+            </span>
 
-            <PopoverContent className="w-72 bg-white shadow-xl rounded-xl border border-gray-200 p-4">
-              <div className="flex gap-4 border-b pb-3 mb-3">
-                <Avatar className="ring-1 ring-blue-400/30">
+            {/* Avatar + Popover */}
+            <Popover>
+              <PopoverTrigger asChild>
+                <Avatar className="cursor-pointer ring-1 ring-white/60 hover:ring-white transition-all shadow-sm">
                   <AvatarImage src={user?.profile?.profilePhoto} alt="profile" />
                   <AvatarFallback className="font-semibold">
                     {user?.fullname?.charAt(0)?.toUpperCase() || "U"}
                   </AvatarFallback>
                 </Avatar>
-                <div>
-                  <h4 className="font-semibold text-gray-800">{user?.fullname}</h4>
-                  <p className="text-sm text-gray-500">{user?.profile?.bio || "No bio available"}</p>
-                </div>
-              </div>
+              </PopoverTrigger>
 
-              <div className="flex flex-col gap-3 text-gray-700">
-                {user && user.role === 'hackApplicant' && (
-                  <Link to="/profile" className="flex items-center gap-2 hover:text-gray-900 transition cursor-pointer">
-                    <User2 className="w-4" />
-                    <span>View Profile</span>
-                  </Link>
-                )}
-                <button
-                  onClick={logOutHandler}
-                  className="flex items-center gap-2 hover:text-red-600 transition cursor-pointer"
-                >
-                  <LogOut className="w-4" />
-                  <span>Logout</span>
-                </button>
-              </div>
-            </PopoverContent>
-          </Popover>
+              <PopoverContent className="w-72 bg-white shadow-xl rounded-xl border border-gray-200 p-4">
+                <div className="flex gap-4 border-b pb-3 mb-3">
+                  <Avatar className="ring-1 ring-blue-400/30">
+                    <AvatarImage src={user?.profile?.profilePhoto} alt="profile" />
+                    <AvatarFallback className="font-semibold">
+                      {user?.fullname?.charAt(0)?.toUpperCase() || "U"}
+                    </AvatarFallback>
+                  </Avatar>
+                  <div>
+                    <h4 className="font-semibold text-gray-800">{user?.fullname}</h4>
+                    <p className="text-sm text-gray-500">{user?.profile?.bio || "No bio available"}</p>
+                  </div>
+                </div>
+
+                <div className="flex flex-col gap-3 text-gray-700">
+                  {user && user.role === 'hackApplicant' && (
+                    <Link to="/profile" className="flex items-center gap-2 hover:text-gray-900 transition cursor-pointer">
+                      <User2 className="w-4" />
+                      <span>View Profile</span>
+                    </Link>
+                  )}
+                  <button
+                    onClick={logOutHandler}
+                    className="flex items-center gap-2 hover:text-red-600 transition cursor-pointer"
+                  >
+                    <LogOut className="w-4" />
+                    <span>Logout</span>
+                  </button>
+                </div>
+              </PopoverContent>
+            </Popover>
+          </div>
         )}
+
       </div>
     </nav>
   );
