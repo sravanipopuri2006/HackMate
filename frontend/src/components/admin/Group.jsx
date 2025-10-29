@@ -1,38 +1,104 @@
-import React, { useEffect, useState } from 'react'
-import Navbar from '../shared/Navbar'
-import { Input } from '../ui/input'
-import { Button } from '../ui/button'
-import GroupTable from './GroupTable'
-import { useNavigate } from 'react-router-dom'
-import useGetAllTeams from '@/hooks/useGetAllTeams'
-import { useDispatch } from 'react-redux'
-import { setSearchTeamByText } from '@/redux/teamSlice'
+import React, { useEffect, useState } from "react";
+import Navbar from "../shared/Navbar";
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
+import GroupTable from "./GroupTable";
+import { useNavigate } from "react-router-dom";
+import useGetAllTeams from "@/hooks/useGetAllTeams";
+import { useDispatch } from "react-redux";
+import { setSearchTeamByText } from "@/redux/teamSlice";
 
 const Group = () => {
   useGetAllTeams();
-  const[input,setInput]=useState("");
+  const [input, setInput] = useState("");
   const navigate = useNavigate();
-  const dispatch=useDispatch();
+  const dispatch = useDispatch();
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(setSearchTeamByText(input));
-
-  },[input]);
+  }, [input, dispatch]);
 
   return (
-    <div>
-      <Navbar/>
-      <div className='max-w-6xl mx-auto my-10'>
-        <div className = 'flex justify-between items-center my-5'>
-           <Input
-              className = "w-fit"
-              placeholder = "Filter by name" onChange={(e)=>setInput(e.target.value)}/>
-           <Button onClick={()=>navigate("/admin/hackteam/create")}>New Team</Button>
+    <div className="min-h-screen bg-[linear-gradient(180deg,#F3F8FF_0%,#E8F2FF_50%,#F3F8FF_100%)]">
+      <Navbar />
+
+      {/* Page container with fixed-navbar offset */}
+      <div className="max-w-6xl mx-auto px-4 md:px-6 pt-24 pb-12">
+        {/* Header / Controls Card */}
+        <div
+          className="
+            relative overflow-hidden rounded-2xl
+            border border-blue-100/70
+            bg-white/75 backdrop-blur-xl
+            shadow-[0_8px_28px_rgba(15,70,140,.10)]
+            hover:shadow-[0_14px_44px_rgba(15,70,140,.18)]
+            transition-shadow duration-300
+          "
+        >
+          <div className="pointer-events-none absolute inset-0 [background:radial-gradient(320px_180px_at_90%_-40%,rgba(21,112,239,.12),transparent_60%)]" />
+          <div className="relative z-10 p-5 md:p-6">
+            <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
+              {/* Filter input */}
+              <div className="flex-1">
+                <Input
+                  className="
+                    w-full
+                    bg-white/80 border border-blue-100/70
+                    focus:border-[#2E6BFF] focus:ring-2 focus:ring-[#2E6BFF]/20
+                    transition-all
+                  "
+                  placeholder="Filter teams by name..."
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                />
+              </div>
+
+              {/* New Team CTA */}
+              <div className="flex-shrink-0">
+                <Button
+                  onClick={() => navigate("/admin/hackteam/create")}
+                  className="
+                    group relative overflow-hidden
+                    bg-gradient-to-r from-[#1570EF] to-[#54A7FF]
+                    text-white font-semibold
+                    shadow-md hover:shadow-lg
+                    transition-all duration-300
+                  "
+                >
+                  <span className="relative z-10">New Team</span>
+                  {/* animated shine */}
+                  <span
+                    className="
+                      pointer-events-none absolute inset-0 -translate-x-full
+                      bg-[linear-gradient(120deg,transparent,rgba(255,255,255,.45),transparent)]
+                      transition-transform duration-700 ease-out
+                      group-hover:translate-x-full
+                    "
+                  />
+                </Button>
+              </div>
+            </div>
+          </div>
         </div>
-        <GroupTable/>
+
+        {/* Table Card */}
+        <div
+          className="
+            mt-6 rounded-2xl
+            border border-blue-100/70
+            bg-white/80 backdrop-blur-xl
+            shadow-[0_6px_22px_rgba(15,70,140,.08)]
+            hover:shadow-[0_10px_30px_rgba(15,70,140,.14)]
+            transition-shadow duration-300
+          "
+        >
+          <div className="p-3 md:p-5">
+            <GroupTable />
+          </div>
+        </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Group;

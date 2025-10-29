@@ -13,7 +13,7 @@ import {
   TableRow,
 } from "../ui/table";
 
-// popover (shadcn)
+// popover
 import { Popover, PopoverContent, PopoverTrigger } from "@radix-ui/react-popover";
 import { MoreHorizontal, Edit2 } from "lucide-react";
 
@@ -31,19 +31,10 @@ const GroupTable = () => {
   }, [teams, searchTeamByText]);
 
   return (
-    <div className="mt- w-full overflow-hidden">
-      <Table className="rounded-xl overflow-hidden">
-        <TableCaption className="text-[#1f3b6b]/80">
-          A list of your recently registered Teams
-        </TableCaption>
-
-        <TableHeader
-          className="
-            bg-[linear-gradient(90deg,#D9E9FF_0%,#CBE1FF_50%,#D9E9FF_100%)]
-            text-[#0B2C5E] border border-white/60
-          "
-        >
-          <TableRow className="hover:bg-transparent">
+    <div className="w-full overflow-hidden rounded-2xl border border-blue-100/70 bg-white/80 backdrop-blur shadow-[0_10px_30px_rgba(15,70,140,.08)]">
+      <Table>
+        <TableHeader>
+          <TableRow className="bg-gradient-to-r from-[#EAF3FF] to-[#DCEEFF]">
             <TableHead className="text-[#0B2C5E] font-semibold">Logo</TableHead>
             <TableHead className="text-[#0B2C5E] font-semibold">Name</TableHead>
             <TableHead className="text-[#0B2C5E] font-semibold">Date</TableHead>
@@ -53,11 +44,16 @@ const GroupTable = () => {
           </TableRow>
         </TableHeader>
 
-        <TableBody className="bg-white/80">
+        <TableBody>
           {(!filteredTeam || filteredTeam.length === 0) ? (
             <TableRow>
-              <TableCell colSpan={4} className="text-center py-8 text-[#1f3b6b]/80">
-                You haven't registered any teams yet.
+              <TableCell colSpan={4}>
+                <div className="my-6 rounded-xl border border-dashed border-blue-200 bg-blue-50/60 p-6 text-center">
+                  <p className="font-semibold text-blue-900">No teams yet</p>
+                  <p className="text-sm text-blue-900/70">
+                    Register a team to get started.
+                  </p>
+                </div>
               </TableCell>
             </TableRow>
           ) : (
@@ -65,21 +61,20 @@ const GroupTable = () => {
               <TableRow
                 key={team._id}
                 className="
-                  group transition-all
-                  hover:bg-[#F2F8FF]
-                  hover:-translate-y-[1px]
+                  group transition-all duration-200 ease-in-out
+                  hover:bg-[#F5FAFF]
+                  hover:shadow-[0_4px_12px_rgba(15,70,140,0.08)]
                 "
               >
                 {/* Logo */}
                 <TableCell>
-                  <div className="relative w-12 h-12 rounded-full overflow-hidden border border-[#cfe4ff] shadow-sm transition-transform group-hover:scale-[1.02]">
+                  <div className="relative h-12 w-12 overflow-hidden rounded-full border border-[#cfe4ff] shadow-sm transition-transform group-hover:scale-[1.02]">
                     <img
                       src={team.logo}
                       alt={team.name}
-                      className="w-full h-full object-cover"
+                      className="h-full w-full object-cover"
                     />
-                    {/* soft focus ring on hover */}
-                    <span className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-transparent group-hover:ring-[#1570EF]/25 transition-all duration-300" />
+                    <span className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-transparent transition-all duration-300 group-hover:ring-[#1570EF]/25" />
                   </div>
                 </TableCell>
 
@@ -96,7 +91,7 @@ const GroupTable = () => {
                 </TableCell>
 
                 {/* Date */}
-                <TableCell className="text-[#1f3b6b]/80">
+                <TableCell className="text-blue-900/80">
                   {team.createdAt?.split("T")[0]}
                 </TableCell>
 
@@ -106,19 +101,15 @@ const GroupTable = () => {
                     <PopoverTrigger asChild>
                       <button
                         className="
-                          inline-flex items-center justify-center
-                          h-9 w-9 rounded-lg
-                          border border-[#cfe4ff] bg-white/80
-                          text-[#1f3b6b]/80
-                          shadow-sm
-                          hover:bg-white
-                          hover:shadow-md
-                          hover:-translate-y-[1px]
-                          transition-all
+                          inline-flex h-9 w-9 items-center justify-center
+                          rounded-full border border-blue-100 bg-white
+                          text-blue-900/80 shadow-sm
+                          transition-all duration-200
+                          hover:scale-105 hover:shadow-md
                         "
-                        aria-label="More"
+                        aria-label="Actions"
                       >
-                        <MoreHorizontal className="w-4 h-4" />
+                        <MoreHorizontal className="h-4 w-4" />
                       </button>
                     </PopoverTrigger>
 
@@ -126,23 +117,21 @@ const GroupTable = () => {
                       side="bottom"
                       align="end"
                       className="
-                        w-44 p-2 rounded-xl border border-[#cfe4ff] bg-white/95
-                        shadow-[0_10px_30px_rgba(15,70,140,.12)]
-                        backdrop-blur-sm
+                        z-50 w-48 rounded-xl border border-blue-100
+                        bg-white/95 p-2 backdrop-blur
+                        shadow-[0_12px_30px_rgba(15,70,140,.15)]
                       "
-                      style={{ outline: "none" }}
                     >
                       <button
                         onClick={() => navigate(`/admin/hackteam/${team._id}`)}
                         className="
-                          w-full flex items-center gap-2 px-3 py-2 rounded-lg
-                          text-[#0B2C5E]
-                          hover:bg-[#EAF3FF]
-                          transition-all group
+                          flex w-full items-center gap-2 rounded-lg
+                          px-3 py-2 text-blue-900/90
+                          transition-colors hover:bg-[#F5FAFF]
                         "
                       >
-                        <Edit2 className="w-4 h-4" />
-                        <span className="text-sm font-medium">Edit Team</span>
+                        <Edit2 className="h-4 w-4" />
+                        <span className="text-sm">Edit Team</span>
                       </button>
                     </PopoverContent>
                   </Popover>
@@ -151,6 +140,10 @@ const GroupTable = () => {
             ))
           )}
         </TableBody>
+
+        <TableCaption className="pb-4 text-sm font-medium text-blue-900">
+          A list of your recently registered teams
+        </TableCaption>
       </Table>
     </div>
   );
