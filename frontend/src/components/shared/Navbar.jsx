@@ -43,31 +43,31 @@ const Navbar = () => {
         {/* Brand (Logo Section) */}
         <Link to="/" className="flex items-center space-x-3 select-none">
           <div className="relative h-20 w-20 flex items-center justify-center">
-            {/* Floating logo with soft shadow */}
             <img
-              src="/LOGO.png" // Replace this with your uploaded image path
+              src="/LOGO.png"
               alt="Hackmate Logo"
               className="h-20 w-20 object-contain drop-shadow-[0_0_6px_rgba(0,0,0,0)]"
             />
           </div>
-
           <span className="text-xl font-extrabold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-[#0A58CA] to-[#00A6FB] drop-shadow-sm">
             HACKMATE
           </span>
         </Link>
 
-
         {/* Nav links */}
         <ul className="hidden md:flex items-center gap-8 font-medium text-blue-900">
+          {/* Home visible for everyone */}
+          <li><Link to='/' className="hover:text-[#0A58CA] transition">Home</Link></li>
+
           {user && user.role === 'hackLead' ? (
             <>
               <li><Link to='/admin/hackteam' className="hover:text-[#0A58CA] transition">Teams</Link></li>
               <li><Link to="/hackathons" className="hover:text-[#0A58CA] transition">Hackathons</Link></li>
               <li><Link to="/admin/role" className="hover:text-[#0A58CA] transition">Roles</Link></li>
+              <li><Link to="/browse" className="hover:text-[#0A58CA] transition">Browse</Link></li>
             </>
           ) : (
             <>
-              <li><Link to='/' className="hover:text-[#0A58CA] transition">Home</Link></li>
               <li><Link to='/teams' className="hover:text-[#0A58CA] transition">Teams</Link></li>
               <li><Link to="/hackathons" className="hover:text-[#0A58CA] transition">Hackathons</Link></li>
               <li><Link to='/browse' className="hover:text-[#0A58CA] transition">Browse</Link></li>
@@ -81,11 +81,11 @@ const Navbar = () => {
             <Link to="/login">
               <Button
                 className="
-          bg-gradient-to-r from-[#1570EF] to-[#54A7FF]
-          text-white hover:opacity-90
-          shadow-md font-semibold
-          transition-all duration-200
-        "
+                  bg-gradient-to-r from-[#1570EF] to-[#54A7FF]
+                  text-white hover:opacity-90
+                  shadow-md font-semibold
+                  transition-all duration-200
+                "
               >
                 Login
               </Button>
@@ -98,7 +98,7 @@ const Navbar = () => {
           </div>
         ) : (
           <div className="flex items-center gap-3">
-            {/* Display user's name */}
+            {/* User name */}
             <span className="hidden md:inline-block text-blue-900 font-semibold">
               Hi,&nbsp;{user?.fullname?.split(' ')[0] || 'User'}
             </span>
@@ -129,12 +129,12 @@ const Navbar = () => {
                 </div>
 
                 <div className="flex flex-col gap-3 text-gray-700">
-                  {user && user.role === 'hackApplicant' && (
-                    <Link to="/profile" className="flex items-center gap-2 hover:text-gray-900 transition cursor-pointer">
-                      <User2 className="w-4" />
-                      <span>View Profile</span>
-                    </Link>
-                  )}
+                  {/* Profile visible for ALL logged-in users */}
+                  <Link to="/profile" className="flex items-center gap-2 hover:text-gray-900 transition cursor-pointer">
+                    <User2 className="w-4" />
+                    <span>View Profile</span>
+                  </Link>
+
                   <button
                     onClick={logOutHandler}
                     className="flex items-center gap-2 hover:text-red-600 transition cursor-pointer"
