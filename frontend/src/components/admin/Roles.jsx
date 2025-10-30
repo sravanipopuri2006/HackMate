@@ -66,16 +66,15 @@ const Roles = () => {
               <Button
                 onClick={() => navigate("/admin/role/post")}
                 className="
-                  relative h-11 px-5
-                  bg-gradient-to-r from-[#1570EF] to-[#54A7FF]
+                  group relative overflow-hidden
+                  bg-gradient-to-r from-[#1570EF] to-[#54A7Ff]
                   text-white font-semibold
-                  shadow-md
-                  transition-all hover:opacity-95
-                  overflow-hidden
+                  shadow-md hover:shadow-lg
+                  transition-all duration-300
                 "
               >
                 <span className="relative z-10">📢 Announce Role</span>
-                {/* shine */}
+                
                 <span
                   className="
                     pointer-events-none absolute inset-0 -translate-x-full
