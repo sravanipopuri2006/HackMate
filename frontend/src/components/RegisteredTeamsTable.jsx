@@ -19,14 +19,14 @@ const RegisteredTeamsTable = () => {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {allAppliedRoles.length <= 0 ? (
+                    {allAppliedRoles?.length <= 0 ? (
                         <TableRow>
                             <TableCell colSpan={4} className="text-center py-4 text-gray-500">
                                 You haven't applied to any Teams yet.
                             </TableCell>
                         </TableRow>
                     ) : (
-                        allAppliedRoles.map((appliedRole) => (
+                        allAppliedRoles?.map((appliedRole) => (
                             <TableRow key={appliedRole._id}>
                                 <TableCell>{appliedRole?.createdAt.split("T")[0]}</TableCell>
                                 <TableCell>{appliedRole.role?.title}</TableCell>

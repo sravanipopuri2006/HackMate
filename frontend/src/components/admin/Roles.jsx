@@ -6,11 +6,12 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setSearchRoleByText } from "@/redux/roleSlice";
 import RolesTable from "./RolesTable";
+import useGetAllAdminRoles from "@/hooks/useGetAllAdminRoles";
 
 const Roles = () => {
   // fetch roles
   // (keep your existing hook if you have one; uncomment if needed)
-  // useGetAllAdminRoles();
+  useGetAllAdminRoles();
 
   const [input, setInput] = useState("");
   const navigate = useNavigate();
