@@ -1,23 +1,26 @@
-import React from 'react';
-import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
-import { Button } from '../ui/button';
-import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
-import { LogOut, User2 } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { USER_API_END_POINT } from '@/utils/constant';
-import { toast } from 'sonner';
-import axios from 'axios';
+import React, { useState } from "react";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import { Button } from "../ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { LogOut, User2, Menu, X } from "lucide-react";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { USER_API_END_POINT } from "@/utils/constant";
+import { toast } from "sonner";
+import axios from "axios";
 import { setUser } from "@/redux/authSlice";
 
 const Navbar = () => {
-  const { user } = useSelector(store => store.auth);
+  const { user } = useSelector((store) => store.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [openMobile, setOpenMobile] = useState(false);
 
   const logOutHandler = async () => {
     try {
-      const res = await axios.get(`${USER_API_END_POINT}/logout`, { withCredentials: true });
+      const res = await axios.get(`${USER_API_END_POINT}/logout`, {
+        withCredentials: true,
+      });
       if (res.data.success) {
         dispatch(setUser(null));
         navigate("/");
@@ -29,6 +32,16 @@ const Navbar = () => {
     }
   };
 
+  // If your app redirects hackLead away from "/", change this:
+  // const goHome = () => navigate(user?.role === "hackLead" ? "/admin/role" : "/");
+  const goHome = () => navigate("/");
+
+  const linkBase =
+    "transition-all duration-200 hover:text-[#0A58CA] hover:-translate-y-[1px]";
+
+  const activeClass = ({ isActive }) =>
+    isActive ? "text-[#0A58CA] font-semibold" : "text-blue-900";
+
   return (
     <nav
       className="
@@ -39,45 +52,80 @@ const Navbar = () => {
       "
     >
       <div className="flex items-center justify-between mx-auto max-w-7xl h-16 px-6">
-
-        {/* Brand (Logo Section) */}
-        <Link to="/" className="flex items-center space-x-3 select-none">
-          <div className="relative h-20 w-20 flex items-center justify-center">
+        {/* Brand */}
+        <button
+          onClick={goHome}
+          className="flex items-center space-x-3 select-none"
+          type="button"
+        >
+          <div className="relative h-12 w-12 flex items-center justify-center">
             <img
               src="/LOGO.png"
               alt="Hackmate Logo"
-              className="h-20 w-20 object-contain drop-shadow-[0_0_6px_rgba(0,0,0,0)]"
+              className="h-12 w-12 object-contain"
             />
           </div>
+
           <span className="text-xl font-extrabold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-[#0A58CA] to-[#00A6FB] drop-shadow-sm">
             HACKMATE
           </span>
-        </Link>
+        </button>
 
-        {/* Nav links */}
-        <ul className="hidden md:flex items-center gap-8 font-medium text-blue-900">
-          {/* Home visible for everyone */}
-          <li><Link to='/' className="hover:text-[#0A58CA] transition">Home</Link></li>
+        {/* Desktop links */}
+        <ul className="hidden md:flex items-center gap-8 font-medium">
+          <li>
+            <NavLink to="/" className={({ isActive }) => `${linkBase} ${activeClass({ isActive })}`}>
+              Home
+            </NavLink>
+          </li>
 
-          {user && user.role === 'hackLead' ? (
+          {user?.role === "hackLead" ? (
             <>
-              <li><Link to='/admin/hackteam' className="hover:text-[#0A58CA] transition">Teams</Link></li>
-              <li><Link to="/hackathons" className="hover:text-[#0A58CA] transition">Hackathons</Link></li>
-              <li><Link to="/admin/role" className="hover:text-[#0A58CA] transition">Roles</Link></li>
-              <li><Link to="/browse" className="hover:text-[#0A58CA] transition">Browse</Link></li>
+              <li>
+                <NavLink to="/admin/hackteam" className={({ isActive }) => `${linkBase} ${activeClass({ isActive })}`}>
+                  Teams
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/hackathons" className={({ isActive }) => `${linkBase} ${activeClass({ isActive })}`}>
+                  Hackathons
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/admin/role" className={({ isActive }) => `${linkBase} ${activeClass({ isActive })}`}>
+                  Roles
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/browse" className={({ isActive }) => `${linkBase} ${activeClass({ isActive })}`}>
+                  Browse
+                </NavLink>
+              </li>
             </>
           ) : (
             <>
-              <li><Link to='/teams' className="hover:text-[#0A58CA] transition">Teams</Link></li>
-              <li><Link to="/hackathons" className="hover:text-[#0A58CA] transition">Hackathons</Link></li>
-              <li><Link to='/browse' className="hover:text-[#0A58CA] transition">Browse</Link></li>
+              <li>
+                <NavLink to="/teams" className={({ isActive }) => `${linkBase} ${activeClass({ isActive })}`}>
+                  Teams
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/hackathons" className={({ isActive }) => `${linkBase} ${activeClass({ isActive })}`}>
+                  Hackathons
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/browse" className={({ isActive }) => `${linkBase} ${activeClass({ isActive })}`}>
+                  Browse
+                </NavLink>
+              </li>
             </>
           )}
         </ul>
 
         {/* Right side */}
         {!user ? (
-          <div className="flex items-center gap-3">
+          <div className="hidden md:flex items-center gap-3">
             <Link to="/login">
               <Button
                 className="
@@ -97,13 +145,12 @@ const Navbar = () => {
             </Link>
           </div>
         ) : (
-          <div className="flex items-center gap-3">
+          <div className="hidden md:flex items-center gap-3">
             {/* User name */}
-            <span className="hidden md:inline-block text-blue-900 font-semibold">
-              Hi,&nbsp;{user?.fullname?.split(' ')[0] || 'User'}
+            <span className="text-blue-900 font-semibold">
+              Hi,&nbsp;{user?.fullname?.split(" ")[0] || "User"}
             </span>
 
-            {/* Avatar + Popover */}
             <Popover>
               <PopoverTrigger asChild>
                 <Avatar className="cursor-pointer ring-1 ring-white/60 hover:ring-white transition-all shadow-sm">
@@ -124,13 +171,18 @@ const Navbar = () => {
                   </Avatar>
                   <div>
                     <h4 className="font-semibold text-gray-800">{user?.fullname}</h4>
-                    <p className="text-sm text-gray-500">{user?.profile?.bio || "No bio available"}</p>
+                    <p className="text-sm text-gray-500">
+                      {user?.profile?.bio || "No bio available"}
+                    </p>
                   </div>
                 </div>
 
                 <div className="flex flex-col gap-3 text-gray-700">
-                  {/* Profile visible for ALL logged-in users */}
-                  <Link to="/profile" className="flex items-center gap-2 hover:text-gray-900 transition cursor-pointer">
+                  {/* ✅ Profile for ALL logged-in users */}
+                  <Link
+                    to="/profile"
+                    className="flex items-center gap-2 hover:text-gray-900 transition cursor-pointer"
+                  >
                     <User2 className="w-4" />
                     <span>View Profile</span>
                   </Link>
@@ -148,7 +200,86 @@ const Navbar = () => {
           </div>
         )}
 
+        {/* Mobile menu button */}
+        <button
+          className="md:hidden inline-flex items-center justify-center h-10 w-10 rounded-xl border border-white/30 bg-white/20 backdrop-blur-md text-blue-900"
+          onClick={() => setOpenMobile((s) => !s)}
+          type="button"
+          aria-label="Toggle menu"
+        >
+          {openMobile ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+        </button>
       </div>
+
+      {/* Mobile dropdown */}
+      {openMobile && (
+        <div className="md:hidden px-6 pb-4">
+          <div className="mt-2 rounded-2xl border border-white/30 bg-white/20 backdrop-blur-md p-4 space-y-3">
+            <Link onClick={() => setOpenMobile(false)} to="/" className="block text-blue-900 font-medium">
+              Home
+            </Link>
+
+            {user?.role === "hackLead" ? (
+              <>
+                <Link onClick={() => setOpenMobile(false)} to="/admin/hackteam" className="block text-blue-900 font-medium">
+                  Teams
+                </Link>
+                <Link onClick={() => setOpenMobile(false)} to="/hackathons" className="block text-blue-900 font-medium">
+                  Hackathons
+                </Link>
+                <Link onClick={() => setOpenMobile(false)} to="/admin/role" className="block text-blue-900 font-medium">
+                  Roles
+                </Link>
+                <Link onClick={() => setOpenMobile(false)} to="/browse" className="block text-blue-900 font-medium">
+                  Browse
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link onClick={() => setOpenMobile(false)} to="/teams" className="block text-blue-900 font-medium">
+                  Teams
+                </Link>
+                <Link onClick={() => setOpenMobile(false)} to="/hackathons" className="block text-blue-900 font-medium">
+                  Hackathons
+                </Link>
+                <Link onClick={() => setOpenMobile(false)} to="/browse" className="block text-blue-900 font-medium">
+                  Browse
+                </Link>
+              </>
+            )}
+
+            {user ? (
+              <>
+                <Link onClick={() => setOpenMobile(false)} to="/profile" className="block text-blue-900 font-medium">
+                  Profile
+                </Link>
+                <button
+                  onClick={() => {
+                    setOpenMobile(false);
+                    logOutHandler();
+                  }}
+                  className="w-full text-left text-red-600 font-semibold"
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <div className="flex gap-2 pt-2">
+                <Link onClick={() => setOpenMobile(false)} to="/login" className="flex-1">
+                  <Button className="w-full bg-gradient-to-r from-[#1570EF] to-[#54A7FF] text-white">
+                    Login
+                  </Button>
+                </Link>
+                <Link onClick={() => setOpenMobile(false)} to="/signup" className="flex-1">
+                  <Button className="w-full bg-white/30 text-blue-900">
+                    Signup
+                  </Button>
+                </Link>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </nav>
   );
 };
