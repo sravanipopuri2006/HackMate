@@ -36,7 +36,7 @@ export default function Teams() {
 
       {/* Push content below fixed navbar */}
       <main className="max-w-7xl mx-auto px-6 pt-24 pb-20">
-        <div className="flex flex-col lg:flex-row gap-10">
+        <div className="flex flex-col lg:flex-row gap-11">
 
           {/* Left: Filter Card (30%) */}
           <aside className="lg:basis-[30%] lg:max-w-[30%]">
@@ -56,7 +56,7 @@ export default function Teams() {
                 className="
                   grid gap-8
                   sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-2
-                  auto-rows-[minmax(420px,auto)]
+                  auto-rows-[minmax(320px,auto)]
                 "
               >
                 {filterRoles.map((role) => (
